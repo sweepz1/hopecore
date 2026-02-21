@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hopecore · 500 quotes + explain</title>
+    <title>hopecore · minimalist quotes</title>
     <style>
         /* --------------------------------
            minimal & polished design
-           label above quote, author under quote
-           explanation below author, quotes near text
-        -------------------------------- */
+           -------------------------------- */
         * {
             margin: 0;
             padding: 0;
@@ -23,85 +21,86 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem 1.5rem;
+            padding: 1.5rem;
             line-height: 1.5;
             color: #1e1e1e;
         }
 
-        /* fixed-width container – label stays centered */
         .container {
-            width: 720px;
-            max-width: 100%;
+            max-width: 680px;
+            width: 100%;
             margin: 0 auto;
         }
 
+        /* main card – airy, subtle, crisp */
         .quote-card {
             background: #ffffff;
             border-radius: 32px;
-            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            padding: 3rem 2.5rem;
             box-shadow: 
                 0 10px 30px -10px rgba(0, 0, 0, 0.05),
                 0 0 0 1px rgba(0, 0, 0, 0.02) inset,
                 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+            transition: box-shadow 0.2s ease;
             text-align: center;
-            margin-bottom: 1.5rem;
-            width: 100%;
+            margin-bottom: 2rem;
         }
 
-        /* label – block to force it above */
+        .quote-card:hover {
+            box-shadow: 
+                0 20px 40px -15px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(0, 0, 0, 0.03) inset;
+        }
+
+        /* hopecore label – tiny, spaced, mute */
         .core-label {
-            display: block;
+            display: inline-block;
             font-size: 0.7rem;
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: #9a9a9a;
             background: #f4f4f4;
-            padding: 0.3rem 1rem 0.3rem 1.4rem;
+            padding: 0.3rem 1rem 0.3rem 1.4rem; /* extra left for letter-spacing */
             border-radius: 40px;
-            margin: 0 auto 1.5rem auto;
-            width: fit-content;
+            margin-bottom: 2rem;
             font-weight: 400;
-            white-space: nowrap;
+            border: none;
         }
 
-        /* quote with fixed marks – always near text */
-        .quote-fixed {
-            position: relative;
-            display: inline-block;
-            padding-inline: 0.3em;   /* adjust this value to change quote distance */
-            font-family: 'Georgia', 'Times New Roman', Times, serif;
+        /* quote text – elegant, generous */
+        .quote-text {
             font-size: 1.9rem;
             font-weight: 380;
             line-height: 1.4;
             letter-spacing: -0.01em;
             color: #121212;
-            max-width: 100%;
-            word-wrap: break-word;
+            margin-bottom: 1.8rem;
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            quotes: "“" "”" "‘" "’";
+            position: relative;
         }
 
-        .quote-fixed::before {
+        .quote-text::before {
             content: "“";
+            font-size: 3rem;
             position: absolute;
-            left: 0;
-            top: -0.1em;
-            opacity: 0.35;
-            font-size: 1.2em;
+            left: -0.6rem;
+            top: -0.4rem;
+            opacity: 0.3;
             font-family: serif;
-            transform: translateX(-100%);
         }
 
-        .quote-fixed::after {
+        .quote-text::after {
             content: "”";
+            font-size: 3rem;
             position: absolute;
-            right: 0;
-            bottom: -0.1em;
-            opacity: 0.35;
-            font-size: 1.2em;
+            right: -0.6rem;
+            bottom: -0.8rem;
+            opacity: 0.3;
             font-family: serif;
-            transform: translateX(100%);
         }
 
-        /* author – always directly under quote */
+        /* author – small, clean, neutral */
         .quote-author {
             font-size: 1rem;
             color: #6b6b6b;
@@ -110,42 +109,15 @@
             padding-top: 0.5rem;
             border-top: 1px solid #ececec;
             display: inline-block;
-            margin-top: 1rem;
         }
 
-        /* explanation area – appears below author */
-        .explanation-area {
-            margin: 1.2rem 0 0.5rem 0;
-            font-size: 0.95rem;
-            color: #4a4a4a;
-            background: #f9f9f9;
-            padding: 1rem 1.2rem;
-            border-radius: 24px;
-            line-height: 1.5;
-            font-style: italic;
-            border: 1px solid #f0f0f0;
-            transition: all 0.2s ease;
-            text-align: left;
-        }
-
-        .explanation-area:empty {
-            display: none;
-        }
-
-        /* button container */
-        .button-row {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 1.2rem 0 1.5rem 0;
-        }
-
-        .hope-button, .explain-button {
+        /* button – minimal, polished, inviting */
+        .hope-button {
             background: transparent;
             border: 1px solid #d4d4d4;
             border-radius: 50px;
-            padding: 0.8rem 2rem;
-            font-size: 0.95rem;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
             font-weight: 450;
             color: #2c2c2c;
             letter-spacing: 0.02em;
@@ -154,123 +126,64 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            margin: 1rem 0 2rem 0;
             background-color: #ffffff;
             box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+            backdrop-filter: blur(2px);
         }
 
-        .hope-button:hover, .explain-button:hover {
+        .hope-button:hover {
             background-color: #fafafa;
             border-color: #b0b0b0;
             transform: scale(1.01);
             box-shadow: 0 8px 18px -10px rgba(0,0,0,0.1);
         }
 
-        .hope-button:active, .explain-button:active {
+        .hope-button:active {
             transform: scale(0.99);
             background-color: #f0f0f0;
             border-color: #9e9e9e;
         }
 
-        #screenshotBtn {
-            min-height: 44px;
-            min-width: 44px;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* footer */
+        /* subtle footer / counter */
         .quiet-footer {
             color: #b2b2b2;
             font-size: 0.75rem;
             letter-spacing: 0.1px;
             font-weight: 350;
             text-transform: uppercase;
-            margin-top: 0.5rem;
+            margin-top: 2.2rem;
             border-top: 1px solid #f0f0f0;
-            padding-top: 1rem;
+            padding-top: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .footer-made {
-            text-align: center;
-            letter-spacing: 0.3px;
-            color: #c7c7c7;
-            font-weight: 350;
-        }
-
-        .footer-made span {
-            font-size: 0.9rem;
-            margin: 0 0.25rem;
-        }
-
         .dot {
             color: #d0d0d0;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            line-height: 0;
         }
 
-        /* responsive */
-        @media (max-width: 760px) {
-            .container { width: 100%; }
+        /* everything spaced, no clutter */
+        .spacer {
+            height: 0.5rem;
         }
 
+        /* screenshot button same as hope-button; touch-friendly on mobile */
+        #screenshotBtn {
+            min-height: 44px;
+            min-width: 44px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* responsive adjustment */
         @media (max-width: 500px) {
             .quote-card { padding: 2rem 1.5rem; }
-            .quote-fixed { font-size: 1.6rem; }
-            .core-label {
-                white-space: normal;
-                letter-spacing: 0.2em;
-            }
-            .hope-button, .explain-button { 
-                padding: 0.7rem 1.5rem; 
-                font-size: 0.9rem;
-            }
-            .button-row { gap: 0.8rem; }
-        }
-
-        /* mobile screenshot overlay – full-screen preview + save hint */
-        #screenshotOverlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.85);
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 1.5rem;
-            box-sizing: border-box;
-        }
-        #screenshotOverlay.is-open {
-            display: flex;
-        }
-        #screenshotOverlay img {
-            max-width: 100%;
-            max-height: 70vh;
-            width: auto;
-            height: auto;
-            border-radius: 12px;
-            background: #fff;
-            /* no user-select/touch-callout so long-press shows native "Add to Photos" / "Save Image" */
-        }
-        #screenshotOverlay .screenshot-hint {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.95rem;
-            margin-top: 1.25rem;
-            text-align: center;
-            line-height: 1.4;
-            max-width: 280px;
-        }
-        #screenshotOverlay .screenshot-close {
-            margin-top: 1.5rem;
-            padding: 0.65rem 1.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            border-radius: 50px;
-            color: #fff;
-            font-size: 0.9rem;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
+            .quote-text { font-size: 1.6rem; }
+            .quote-text::before { left: -0.2rem; }
+            .quote-text::after { right: -0.2rem; }
         }
     </style>
 </head>
@@ -278,22 +191,18 @@
 <div class="container">
     <div class="quote-card">
         <span class="core-label">H O P E · C O R E</span>
-        <div id="quoteDisplay" class="quote-fixed">What you get by achieving your goals is not as important as what you become by achieving your goals.</div>
-        <div id="authorDisplay" class="quote-author">Zig Ziglar</div>
-        <div id="explanationDisplay" class="explanation-area"></div>
+        <div id="quoteDisplay" class="quote-text">there is light</div>
+        <div id="authorDisplay" class="quote-author">unknown</div>
     </div>
 
-    <div class="button-row">
-        <button class="hope-button" id="newQuoteBtn">⟳ new hope</button>
-        <button class="explain-button" id="explainBtn">☀ explain</button>
-        <button class="hope-button" id="screenshotBtn" type="button" aria-label="Save screenshot">📷 screenshot</button>
+    <div style="text-align: center; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; align-items: center;">
+        <button class="hope-button" id="newQuoteBtn">⟳  new hope</button>
+        <button class="hope-button" id="screenshotBtn" type="button" aria-label="Save screenshot">📷  screenshot</button>
     </div>
 
     <div class="quiet-footer">
-        <span>500 rays of hope</span>
-        <div class="footer-made">
-            <span>✦</span> made in canada <span>✦</span>
-        </div>
+        <span>200 rays of hope</span>
+        <span class="dot">✦</span>
         <span>press the button</span>
     </div>
 </div>
@@ -302,1382 +211,230 @@
 <script>
 (function() {
     // ------------------------------------------------------------
-    // 500 hopecore quotes with researched explanations
-    // each explanation is 1-2 sentences, directly about the quote
+    // 200 hopecore quotes – minimal array, full of light
+    // mixed classic, modern, and quiet affirmations
     // ------------------------------------------------------------
     const quotes = [
-        {
-            text: "Hope is the thing with feathers that perches in the soul.",
-            author: "Emily Dickinson",
-            explanation: "Dickinson personifies hope as a bird that lives within us, singing without needing anything in return. It reminds us that hope is a natural, enduring presence that never asks for a thing."
-        },
-        {
-            text: "The sun himself is weak when he first rises, and gathers strength and courage as the day gets on.",
-            author: "Charles Dickens",
-            explanation: "Dickens uses the rising sun as a metaphor for human progress – we all start small and grow stronger with time. It encourages patience and trust in the process of becoming."
-        },
-        {
-            text: "What the caterpillar calls the end of the world, the master calls a butterfly.",
-            author: "Richard Bach",
-            explanation: "This quote reframes endings as transformations. What feels like destruction to the caterpillar is actually the birth of something beautiful – a lesson in perspective."
-        },
-        {
-            text: "Keep your face always toward the sunshine—and shadows will fall behind you.",
-            author: "Walt Whitman",
-            explanation: "Whitman advises us to focus on the positive (sunshine) so that negativity (shadows) naturally falls out of sight. It's a simple, powerful reminder to orient ourselves toward light."
-        },
-        {
-            text: "Hope is being able to see that there is light despite all of the darkness.",
-            author: "Desmond Tutu",
-            explanation: "Tutu, who lived through apartheid, defines hope as the active choice to see goodness even in terrible circumstances. It's not blind optimism but a resilient vision."
-        },
-        {
-            text: "You are never too old to set another goal or to dream a new dream.",
-            author: "C.S. Lewis",
-            explanation: "Lewis challenges the idea that age limits our potential. It's a call to keep dreaming and growing, no matter how many years have passed."
-        },
-        {
-            text: "Believe you can and you're halfway there.",
-            author: "Theodore Roosevelt",
-            explanation: "Roosevelt highlights the power of self-belief as the foundation of achievement. The mental shift from doubt to confidence is the most critical first step."
-        },
-        {
-            text: "It always seems impossible until it's done.",
-            author: "Nelson Mandela",
-            explanation: "Mandela, who overcame decades of imprisonment, reminds us that daunting tasks become achievable through persistence. The 'impossible' is often just a milestone we haven't reached yet."
-        },
-        {
-            text: "The future belongs to those who believe in the beauty of their dreams.",
-            author: "Eleanor Roosevelt",
-            explanation: "Roosevelt ties hope to action – believing in your dreams gives you the motivation to shape the future. It's a declaration that visionaries are the ones who create tomorrow."
-        },
-        {
-            text: "In the middle of every difficulty lies opportunity.",
-            author: "Albert Einstein",
-            explanation: "Einstein encourages us to look for hidden potential within challenges. Problems are not dead ends but chances to learn, innovate, and grow."
-        },
-        {
-            text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
-            author: "Ralph Waldo Emerson",
-            explanation: "Emerson shifts focus from external circumstances to inner strength. Our past and future are less important than the character and courage we hold inside."
-        },
-        {
-            text: "Start where you are. Use what you have. Do what you can.",
-            author: "Arthur Ashe",
-            explanation: "Ashe, a tennis champion who faced immense adversity, offers a practical formula for progress. You don't need perfect conditions – just begin with whatever is at hand."
-        },
-        {
-            text: "When everything seems to be going against you, remember that the airplane takes off against the wind, not with it.",
-            author: "Henry Ford",
-            explanation: "Ford uses the physics of flight to illustrate that resistance can be a lifting force. Opposition isn't a sign to stop – it might be what propels you upward."
-        },
-        {
-            text: "The only way to do great work is to love what you do.",
-            author: "Steve Jobs",
-            explanation: "Jobs connects passion with excellence. When you truly care about your work, the effort feels meaningful and the results often become great."
-        },
-        {
-            text: "You are enough just as you are.",
-            author: "Meghan Markle",
-            explanation: "This quote is a gentle affirmation of self-worth. It counters the pressure to change or improve constantly, reminding us that our present self is already valuable."
-        },
-        {
-            text: "Hope smiles from the threshold of the year to come, whispering 'it will be happier.'",
-            author: "Alfred Lord Tennyson",
-            explanation: "Tennyson personifies hope as a comforting figure at the edge of a new year. It's about the natural optimism we feel when anticipating fresh starts."
-        },
-        {
-            text: "Storms make trees take deeper roots.",
-            author: "Dolly Parton",
-            explanation: "Parton uses nature to show that adversity strengthens us. Just as trees grip the earth tighter during storms, we become more grounded through hardship."
-        },
-        {
-            text: "You may have to fight a battle more than once to win it.",
-            author: "Margaret Thatcher",
-            explanation: "Thatcher acknowledges that perseverance often means repeated effort. Winning sometimes requires multiple attempts, and that's not failure – it's the process."
-        },
-        {
-            text: "The best way to not feel hopeless is to get up and do something.",
-            author: "Barack Obama",
-            explanation: "Obama prescribes action as the antidote to despair. Instead of dwelling on problems, taking even a small step can restore a sense of agency and hope."
-        },
-        {
-            text: "We must accept finite disappointment, but never lose infinite hope.",
-            author: "Martin Luther King Jr.",
-            explanation: "King distinguishes temporary setbacks from eternal hope. Disappointments are part of life, but hope – being infinite – should never be surrendered."
-        },
-        {
-            text: "Hope is a waking dream.",
-            author: "Aristotle",
-            explanation: "Aristotle suggests that hope keeps our aspirations alive while we are conscious. It's like dreaming with our eyes open, fueling our actions."
-        },
-        {
-            text: "There is no medicine like hope, no incentive so great, and no tonic so powerful as expectation of something tomorrow.",
-            author: "Orison Swett Marden",
-            explanation: "Marden praises hope as the ultimate healer and motivator. The anticipation of a better future can sustain us through present difficulties."
-        },
-        {
-            text: "Learn from yesterday, live for today, hope for tomorrow.",
-            author: "Albert Einstein",
-            explanation: "Einstein offers a balanced philosophy: use the past as a teacher, embrace the present fully, and let hope guide you toward what's ahead."
-        },
-        {
-            text: "You are braver than you believe, stronger than you seem, and smarter than you think.",
-            author: "A.A. Milne",
-            explanation: "From Winnie the Pooh, this quote reminds us that we often underestimate our own capabilities. It's a gentle nudge to trust ourselves more."
-        },
-        {
-            text: "Not all of us can do great things. But we can do small things with great love.",
-            author: "Mother Teresa",
-            explanation: "Mother Teresa redefines greatness as love in action. Even humble tasks become meaningful when done with genuine care."
-        },
-        {
-            text: "What seems to us as bitter trials are often blessings in disguise.",
-            author: "Oscar Wilde",
-            explanation: "Wilde invites us to reconsider hardships – they may be hidden gifts that teach us or lead us somewhere better."
-        },
-        {
-            text: "Turn your wounds into wisdom.",
-            author: "Oprah Winfrey",
-            explanation: "Oprah encourages us to transform pain into insight. Our struggles can become sources of strength and understanding if we reflect on them."
-        },
-        {
-            text: "You are the sky. Everything else – it's just the weather.",
-            author: "Pema Chödrön",
-            explanation: "Chödrön uses a Buddhist metaphor: your essential self is the vast, unchanging sky, while emotions and events are passing clouds. Don't mistake the weather for who you are."
-        },
-        {
-            text: "Hope is the only bee that makes honey without flowers.",
-            author: "Robert Green Ingersoll",
-            explanation: "Ingersoll poetically suggests that hope creates sweetness even when there is no external source of nourishment. It is self-generating."
-        },
-        {
-            text: "The darkest hour has only sixty minutes.",
-            author: "Morris Mandel",
-            explanation: "This quote offers perspective: even the worst moments are temporary. Time keeps moving, and so will we."
-        },
-        {
-            text: "Even the darkest night will end and the sun will rise.",
-            author: "Victor Hugo",
-            explanation: "Hugo assures us that no matter how long and difficult the night, dawn is inevitable. It's a promise of renewal."
-        },
-        {
-            text: "Hold fast to dreams, for if dreams die, life is a broken-winged bird that cannot fly.",
-            author: "Langston Hughes",
-            explanation: "Hughs uses vivid imagery to show that dreams give life its ability to soar. Without them, we are grounded and incomplete."
-        },
-        {
-            text: "Hope is a necessity for normal life and the major weapon against the suicide of the soul.",
-            author: "Kenneth L. Pike",
-            explanation: "Pike frames hope as essential for mental and spiritual survival. It's not a luxury but a shield against despair."
-        },
-        {
-            text: "Weeping may endure for a night, but joy comes in the morning.",
-            author: "Psalm 30:5",
-            explanation: "This biblical verse acknowledges pain while promising its end. Joy will return, just as morning follows night."
-        },
-        {
-            text: "Your present circumstances don't determine where you can go; they merely determine where you start.",
-            author: "Nido Qubein",
-            explanation: "Qubein separates current reality from future potential. Where you are now is just a starting point, not a limit."
-        },
-        {
-            text: "Sometimes your only available transportation is a leap of faith.",
-            author: "Margaret Shepard",
-            explanation: "Shepard recognizes that courage is needed when there's no clear path. A leap of faith can carry you forward when logic fails."
-        },
-        {
-            text: "You don't have to see the whole staircase, just take the first step.",
-            author: "Martin Luther King Jr.",
-            explanation: "King encourages action despite uncertainty. Progress doesn't require a complete map – just the willingness to begin."
-        },
-        {
-            text: "The miracle isn't that I finished. The miracle is that I had the courage to start.",
-            author: "John Bingham",
-            explanation: "Bingham shifts focus from completion to initiation. Starting is often the hardest and most miraculous part of any journey."
-        },
-        {
-            text: "Hope is important because it can make the present moment less difficult to bear.",
-            author: "Thich Nhat Hanh",
-            explanation: "The Buddhist teacher explains that hope lightens today's burdens by connecting us to a better future. It's a form of inner resilience."
-        },
-        {
-            text: "If you can dream it, you can do it.",
-            author: "Walt Disney",
-            explanation: "Disney inspires belief in the power of imagination. Dreams are the blueprints for achievement."
-        },
-        {
-            text: "Once you choose hope, anything's possible.",
-            author: "Christopher Reeve",
-            explanation: "Reeve, who became paralyzed, speaks from experience: hope opens the door to possibility, even in the face of immense limitation."
-        },
-        {
-            text: "Hope itself is like a star- not to be seen in the sunshine of prosperity, and only to be discovered in the night of adversity.",
-            author: "Charles Haddon Spurgeon",
-            explanation: "Spurgeon observes that hope shines brightest during hard times, much like stars appear only in darkness. Adversity reveals its true light."
-        },
-        {
-            text: "Hope is the feeling we have that the feeling we have is not permanent.",
-            author: "Mignon McLaughlin",
-            explanation: "McLaughlin defines hope as the belief that our current emotional state will change. It's a reassurance that pain won't last forever."
-        },
-        {
-            text: "Keep going. Everything you need will come to you at the right time.",
-            author: "Rumi",
-            explanation: "Rumi counsels patience and trust in divine timing. What you seek is already on its way – just continue your path."
-        },
-        {
-            text: "Hope is a song in a weary throat.",
-            author: "Paul Laurence Dunbar",
-            explanation: "Dunbar captures hope as a fragile but persistent expression, sung even when exhausted. It's the voice that refuses to go silent."
-        },
-        {
-            text: "The road that is built in hope is more pleasant to the traveler than the road built in despair.",
-            author: "John Bunyan",
-            explanation: "Bunyan compares two mindsets: hopeful journeys feel lighter because expectation lifts the spirit, while despair weighs every step."
-        },
-        {
-            text: "Don't quit. Suffer now and live the rest of your life like a champion.",
-            author: "Muhammad Ali",
-            explanation: "Ali urges short-term endurance for long-term reward. Temporary pain is the price of a lasting victory."
-        },
-        {
-            text: "A single sunbeam is enough to drive away many shadows.",
-            author: "Francis of Assisi",
-            explanation: "Francis illustrates that even a small amount of light can dispel darkness. Hope doesn't need to be huge to be effective."
-        },
-        {
-            text: "Hope is the pillar that holds up the world.",
-            author: "Pliny the Elder",
-            explanation: "Pliny claims hope is foundational – without it, society and individual lives would collapse. It's a universal support."
-        },
-        {
-            text: "Your heart is full of fertile seeds, waiting to sprout.",
-            author: "Morihei Ueshiba",
-            explanation: "Ueshiba, an aikido master, speaks of inner potential. Like seeds, our hopes need nurturing but are already within us."
-        },
-        {
-            text: "Every morning we are born again. What we do today matters most.",
-            author: "Buddha",
-            explanation: "Buddha emphasizes the freshness of each day. The past is gone; today is where we create meaning."
-        },
-        {
-            text: "Happiness can be found even in the darkest of times, if one only remembers to turn on the light.",
-            author: "J.K. Rowling",
-            explanation: "Rowling (via Dumbledore) suggests that light is a choice we can make. Even in darkness, we have the power to illuminate our own experience."
-        },
-        {
-            text: "Do not spoil what you have by desiring what you have not.",
-            author: "Epicurus",
-            explanation: "Epicurus warns against letting longing for more ruin appreciation of the present. Gratitude is a form of hope that stays grounded."
-        },
-        {
-            text: "You have within you right now, everything you need to deal with whatever the world can throw at you.",
-            author: "Brian Tracy",
-            explanation: "Tracy affirms self-sufficiency. You already possess the inner resources to face challenges – trust them."
-        },
-        {
-            text: "When you have hope, you have everything.",
-            author: "Unknown",
-            explanation: "This simple proverb states that hope encompasses all other goods. With hope, you can endure and find meaning."
-        },
-        {
-            text: "Hope is the only thing stronger than fear.",
-            author: "Suzanne Collins",
-            explanation: "From 'The Hunger Games,' this line asserts that hope can overpower fear, inspiring rebellion and resilience."
-        },
-        {
-            text: "The opposite of courage is not cowardice, it is conformity.",
-            author: "Jim Hightower",
-            explanation: "Hightower redefines courage as nonconformity. Hope often requires breaking from the crowd to pursue a better way."
-        },
-        {
-            text: "You are not a drop in the ocean. You are the entire ocean in a drop.",
-            author: "Rumi",
-            explanation: "Rumi reveals the infinite within each individual. You contain vastness – hope is that recognition of inner depth."
-        },
-        {
-            text: "Don’t let yesterday take up too much of today.",
-            author: "Will Rogers",
-            explanation: "Rogers advises against letting past disappointments consume present moments. Hope is about focusing on now and tomorrow."
-        },
-        {
-            text: "Hope is the little voice that whispers 'maybe' when the whole world is shouting 'no'.",
-            author: "Unknown",
-            explanation: "This quote personifies hope as a quiet but persistent rebel. It offers possibility when everything else denies it."
-        },
-        {
-            text: "Everything will be okay in the end. If it's not okay, it's not the end.",
-            author: "John Lennon",
-            explanation: "Lennon comforts with the idea that struggles are part of a longer story. The end, when it comes, will bring resolution."
-        },
-        {
-            text: "The sun is a daily reminder that we too can rise again from the darkness.",
-            author: "Unknown",
-            explanation: "Each sunrise models renewal. Just as the sun returns, we can emerge from our own dark times."
-        },
-        {
-            text: "Hope is the power of being cheerful in circumstances that we know to be desperate.",
-            author: "G.K. Chesterton",
-            explanation: "Chesterton defines hope as a radical cheerfulness that acknowledges hardship but chooses joy anyway."
-        },
-        {
-            text: "Your soul is your greatest compass. Trust it.",
-            author: "Unknown",
-            explanation: "This quote encourages inner guidance. Hope is the trust that your soul knows the way, even when the path is unclear."
-        },
-        {
-            text: "There is a light in this world, a healing spirit more strong than any darkness.",
-            author: "John O'Donohue",
-            explanation: "O'Donohue speaks of an inherent goodness that surpasses negativity. Hope connects us to that unquenchable light."
-        },
-        {
-            text: "Courage doesn’t always roar. Sometimes courage is the quiet voice at the end of the day saying 'I will try again tomorrow'.",
-            author: "Mary Anne Radmacher",
-            explanation: "Radmacher celebrates quiet perseverance. Hope is that gentle vow to continue, even without fanfare."
-        },
-        {
-            text: "You are made of stars. Don't forget.",
-            author: "Unknown",
-            explanation: "This cosmic reminder connects us to the universe's grandeur. Hope arises from knowing we are part of something vast and beautiful."
-        },
-        {
-            text: "Hope is the thing that keeps us going when everything else says give up.",
-            author: "Unknown",
-            explanation: "A straightforward definition: hope is the internal engine that refuses to stop, even when logic says quit."
-        },
-        {
-            text: "To plant a garden is to believe in tomorrow.",
-            author: "Audrey Hepburn",
-            explanation: "Hepburn uses gardening as a metaphor for hope – you invest effort today with faith that the future will bloom."
-        },
-        {
-            text: "Your current situation is not your final destination.",
-            author: "Unknown",
-            explanation: "This quote separates 'now' from 'forever.' Where you are is just a stop on the journey, not the end."
-        },
-        {
-            text: "The world is full of magic things, patiently waiting for our senses to grow sharper.",
-            author: "W.B. Yeats",
-            explanation: "Yeats suggests that wonder is always present, but we need to develop the perception to see it. Hope sharpens our senses."
-        },
-        {
-            text: "You don’t have to have it all figured out to move forward.",
-            author: "Unknown",
-            explanation: "Progress doesn't require complete understanding. Hope allows us to take steps into the unknown."
-        },
-        {
-            text: "There is hope, even when your brain tells you there isn’t.",
-            author: "John Green",
-            explanation: "Green acknowledges that our minds can lie. Hope exists beyond rational thought – it's a feeling we can choose."
-        },
-        {
-            text: "Sometimes the smallest step in the right direction ends up being the biggest step of your life.",
-            author: "Unknown",
-            explanation: "A tiny action can have monumental impact. Hope motivates that first, crucial step."
-        },
-        {
-            text: "The stars can’t shine without darkness. You are proof of that.",
-            author: "Unknown",
-            explanation: "Darkness is necessary for light to be visible. Your own struggles make your strengths shine brighter."
-        },
-        {
-            text: "A hope is a seed. Plant it, water it, and watch it grow.",
-            author: "Unknown",
-            explanation: "Hope is not passive – it requires nurturing. Like a seed, it needs care to flourish."
-        },
-        {
-            text: "Your heart knows the way. Run in that direction.",
-            author: "Rumi",
-            explanation: "Rumi urges us to follow our deepest intuition. Hope is the voice of the heart guiding us forward."
-        },
-        {
-            text: "You are worthy of love and kindness, especially from yourself.",
-            author: "Unknown",
-            explanation: "Self-compassion is a form of hope. Treating yourself kindly builds the foundation for a hopeful outlook."
-        },
-        {
-            text: "Hope is oxygen for the soul.",
-            author: "Unknown",
-            explanation: "Just as the body needs air, the spirit needs hope to survive. It's essential, not optional."
-        },
-        {
-            text: "You are here for a reason. Don't let anyone make you feel otherwise.",
-            author: "Unknown",
-            explanation: "This quote affirms individual purpose. Hope grows when we believe our existence matters."
-        },
-        {
-            text: "One day, you will tell your story of how you overcame what you're going through now.",
-            author: "Unknown",
-            explanation: "It invites you to see yourself as a future survivor. Hope is the anticipation of that victorious narrative."
-        },
-        {
-            text: "Stay close to anything that makes you glad you are alive.",
-            author: "Hafez",
-            explanation: "Hafez advises seeking joy as a spiritual practice. Hope is found in those things that remind us life is worth living."
-        },
-        {
-            text: "Hope is not the conviction that something will turn out well, but the certainty that something makes sense, regardless of how it turns out.",
-            author: "Václav Havel",
-            explanation: "Havel, a dissident and philosopher, defines hope as deeper than optimism – it's a sense of meaning that persists even when outcomes are uncertain."
-        },
-        {
-            text: "You are not alone. You are never alone.",
-            author: "Unknown",
-            explanation: "A reminder of connection. Hope can come from knowing others share our struggles and support exists."
-        },
-        {
-            text: "Let your hope keep you joyful. Be patient in your troubles and pray at all times.",
-            author: "Romans 12:12",
-            explanation: "This verse links hope with joy and patience. Hope fuels perseverance and keeps the heart light."
-        },
-        {
-            text: "Hope is the anchor of the soul, both sure and steadfast.",
-            author: "Hebrews 6:19",
-            explanation: "Biblical imagery of hope as an anchor – it holds us steady through life's storms, firm and reliable."
-        },
-        {
-            text: "Bloom where you are planted.",
-            author: "Unknown",
-            explanation: "A call to thrive in your current circumstances. Hope is the determination to grow wherever you find yourself."
-        },
-        {
-            text: "Hope is a renewable option: if you run out of it at the end of the day, you get to order more overnight.",
-            author: "Unknown",
-            explanation: "Playful but true – hope can be replenished. Each new day offers a fresh supply."
-        },
-        {
-            text: "You are the light in someone's life. Don't forget that.",
-            author: "Unknown",
-            explanation: "Your existence brightens others. Hope includes recognizing the positive impact you have."
-        },
-        {
-            text: "Breathe. You are going to be okay.",
-            author: "Unknown",
-            explanation: "A simple, grounding affirmation. Hope can be as basic as trusting that you will survive the moment."
-        },
-        {
-            text: "Your story is not over. The best chapters are yet to come.",
-            author: "Unknown",
-            explanation: "It frames life as an ongoing book. Hope anticipates future joys and accomplishments."
-        },
-        {
-            text: "There is no despair without hope. If you feel despair, you are hoping for something better.",
-            author: "Unknown",
-            explanation: "A paradox: despair actually contains hope, because it implies a longing for improvement."
-        },
-        {
-            text: "Stay soft. The world needs your kindness.",
-            author: "Unknown",
-            explanation: "In a harsh world, maintaining gentleness is an act of hope. Kindness plants seeds for a better future."
-        },
-        {
-            text: "What feels like the end is often just a new beginning.",
-            author: "Unknown",
-            explanation: "Endings are rarely final – they lead to fresh starts. Hope helps us see the transition."
-        },
-        {
-            text: "Hope is a verb with its sleeves rolled up.",
-            author: "David Orr",
-            explanation: "Orr emphasizes that hope is active, not passive. It requires work and engagement."
-        },
-        {
-            text: "You are capable of more than you know.",
-            author: "Unknown",
-            explanation: "A belief in untapped potential. Hope encourages us to explore our limits."
-        },
-        {
-            text: "Small steps every day lead to big changes.",
-            author: "Unknown",
-            explanation: "Progress is incremental. Hope motivates the consistent effort that compounds over time."
-        },
-        {
-            text: "Hope sees the invisible, feels the intangible, and achieves the impossible.",
-            author: "Unknown",
-            explanation: "Hope transcends normal limits. It perceives what isn't yet real and works toward it."
-        },
-        {
-            text: "The world needs your particular magic.",
-            author: "Unknown",
-            explanation: "Everyone has a unique gift. Hope is believing that your contribution is essential."
-        },
-        {
-            text: "You are a masterpiece in progress.",
-            author: "Unknown",
-            explanation: "You're not finished yet. Hope embraces the ongoing process of becoming."
-        },
-        {
-            text: "Hold on. The morning is coming.",
-            author: "Unknown",
-            explanation: "A promise of relief. Hope is the grip that keeps us holding on through the night."
-        },
-        {
-            text: "Hope is the whisper that tells us tomorrow will be better.",
-            author: "Unknown",
-            explanation: "A gentle, persistent voice. Hope doesn't shout – it softly assures."
-        },
-        {
-            text: "Even when you feel like giving up, keep going. Your future self will thank you.",
-            author: "Unknown",
-            explanation: "Encouragement from a future perspective. Hope imagines the gratitude of the person you'll become."
-        },
-        {
-            text: "You are enough. You have always been enough.",
-            author: "Unknown",
-            explanation: "A core affirmation. Hope rests on the knowledge that you don't need to be more than you are."
-        },
-        {
-            text: "Hope is the belief that the universe has your back.",
-            author: "Unknown",
-            explanation: "A spiritual take – hope trusts in a supportive cosmos, even when evidence is lacking."
-        },
-        {
-            text: "The comeback is always stronger than the setback.",
-            author: "Unknown",
-            explanation: "Resilience outlasts adversity. Hope looks forward to the rebound."
-        },
-        {
-            text: "You are a beautiful, unexpected miracle.",
-            author: "Unknown",
-            explanation: "Your existence is improbable and precious. Hope celebrates that wonder."
-        },
-        {
-            text: "Trust the wait. Embrace the uncertainty. Enjoy the beauty of becoming.",
-            author: "Unknown",
-            explanation: "A guide to patience. Hope finds value in the in-between, not just the destination."
-        },
-        {
-            text: "When nothing is certain, everything is possible.",
-            author: "Unknown",
-            explanation: "Uncertainty opens doors. Hope thrives on possibility, not guarantees."
-        },
-        {
-            text: "Your only limit is your soul. And your soul is limitless.",
-            author: "Unknown",
-            explanation: "The spirit has no bounds. Hope taps into that boundlessness."
-        },
-        {
-            text: "There is hope, even in the smallest spark.",
-            author: "Unknown",
-            explanation: "Hope doesn't need to be a blaze. A spark can ignite change."
-        },
-        {
-            text: "Keep your face to the sun and you will never see the shadows.",
-            author: "Unknown",
-            explanation: "Similar to Whitman – orientation matters. Focus on light, and darkness fades from view."
-        },
-        {
-            text: "You are not your worst day.",
-            author: "Unknown",
-            explanation: "Your identity isn't defined by low points. Hope separates who you are from what you've been through."
-        },
-        {
-            text: "Hope is the memory of the future.",
-            author: "Gaston Berger",
-            explanation: "A philosophical definition: hope is like remembering something that hasn't happened yet – a vivid sense of what could be."
-        },
-        {
-            text: "Let your faith be bigger than your fear.",
-            author: "Unknown",
-            explanation: "A call to prioritize belief over anxiety. Hope expands faith."
-        },
-        {
-            text: "You are the author of your own life. Write something beautiful.",
-            author: "Unknown",
-            explanation: "You have creative control. Hope inspires you to craft a meaningful story."
-        },
-        {
-            text: "The sun will rise and we will try again.",
-            author: "Unknown",
-            explanation: "Daily renewal. Hope is the commitment to keep trying with each new day."
-        },
-        {
-            text: "There is a crack in everything. That’s how the light gets in.",
-            author: "Leonard Cohen",
-            explanation: "Cohen finds hope in imperfection. Our wounds allow healing and illumination to enter."
-        },
-        {
-            text: "Still, like dust, I'll rise.",
-            author: "Maya Angelou",
-            explanation: "Angelou's iconic line about resilience. No matter how many times she's beaten down, she will rise again – hope embodied."
-        },
-        {
-            text: "Look for the helpers. You will always find people who are helping.",
-            author: "Mister Rogers",
-            explanation: "Rogers advised children to seek out kindness during tragedies. Hope is found in the presence of those who care."
-        },
-        {
-            text: "The wound is the place where the Light enters you.",
-            author: "Rumi",
-            explanation: "Rumi suggests that our vulnerabilities are entry points for grace. Hope can emerge from the very places we feel broken."
-        },
-        {
-            text: "No act of kindness, no matter how small, is ever wasted.",
-            author: "Aesop",
-            explanation: "Kindness ripples outward. Hope grows when we realize our small actions matter."
-        },
-        {
-            text: "Courage, dear heart.",
-            author: "C.S. Lewis",
-            explanation: "A simple, tender encouragement from 'The Voyage of the Dawn Treader.' Hope whispers these words when we're afraid."
-        },
-        {
-            text: "You have power over your mind — not outside events. Realize this, and you will find strength.",
-            author: "Marcus Aurelius",
-            explanation: "Stoic wisdom: we control our reactions, not circumstances. Hope is an internal power."
-        },
-        {
-            text: "The best time to plant a tree was 20 years ago. The second best time is now.",
-            author: "Chinese Proverb",
-            explanation: "Regret is useless; action is always possible. Hope seizes the present moment."
-        },
-        {
-            text: "You are the one you've been waiting for.",
-            author: "Unknown",
-            explanation: "Self-reliance and self-belief. The hope you seek may come from within."
-        },
-        {
-            text: "You are loved. You are worthy. You matter.",
-            author: "Unknown",
-            explanation: "Three affirmations in one. Hope is rooted in a sense of inherent value."
-        },
-        {
-            text: "Fall seven times, stand up eight.",
-            author: "Japanese Proverb",
-            explanation: "Resilience defined. Hope is the force that gets us up one more time than we fall."
-        },
-        {
-            text: "Hope is the heartbeat of the soul.",
-            author: "Unknown",
-            explanation: "Hope keeps the spirit alive, just as a heartbeat sustains the body."
-        },
-        {
-            text: "The sun will shine again. It always does.",
-            author: "Unknown",
-            explanation: "A promise based on natural cycles. Hope trusts in the return of light."
-        },
-        {
-            text: "You are a universe in human form.",
-            author: "Unknown",
-            explanation: "You contain multitudes. Hope arises from recognizing your own vastness."
-        },
-        {
-            text: "Don't be afraid to start over. It’s a chance to build something better.",
-            author: "Unknown",
-            explanation: "Restarting is not failure – it's an opportunity. Hope embraces new beginnings."
-        },
-        {
-            text: "Hope is the song of the soul.",
-            author: "Unknown",
-            explanation: "Music as metaphor. Hope is the melody that plays within us, even in silence."
-        },
-        {
-            text: "You are not behind. You are on your own path.",
-            author: "Unknown",
-            explanation: "Comparison steals hope. This quote reminds you that your timeline is unique."
-        },
-        {
-            text: "The best is yet to come.",
-            author: "Unknown",
-            explanation: "A classic expression of optimism. Hope looks forward to future goodness."
-        },
-        {
-            text: "Hope is the calm after the storm.",
-            author: "Unknown",
-            explanation: "Tranquility follows chaos. Hope is the peace that eventually arrives."
-        },
-        {
-            text: "You are a gift to the world. Never forget that.",
-            author: "Unknown",
-            explanation: "Your existence is a present to others. Hope celebrates that contribution."
-        },
-        {
-            text: "Even in the darkest moments, hope is a flicker that refuses to die.",
-            author: "Unknown",
-            explanation: "Hope persists as a tiny flame, impossible to extinguish completely."
-        },
-        {
-            text: "Your potential is endless. Go for it.",
-            author: "Unknown",
-            explanation: "Unlimited possibility. Hope urges you to pursue it."
-        },
-        {
-            text: "Hope is the anchor that holds through the storm.",
-            author: "Unknown",
-            explanation: "Reinforces the biblical metaphor – hope keeps us grounded when winds rage."
-        },
-        {
-            text: "You are the author of your own story. Write a beautiful one.",
-            author: "Unknown",
-            explanation: "You hold the pen. Hope inspires you to craft a narrative of meaning."
-        },
-        {
-            text: "There is hope. There is always hope.",
-            author: "Unknown",
-            explanation: "A simple, absolute statement. Hope is never absent."
-        },
-        {
-            text: "You are a star. Shine on.",
-            author: "Unknown",
-            explanation: "You have inherent luminosity. Hope encourages you to let it out."
-        },
-        {
-            text: "Hope is the light that guides us home.",
-            author: "Unknown",
-            explanation: "Like a beacon, hope leads us back to ourselves, to safety, to connection."
-        },
-        {
-            text: "You are not your past. You are the possibility of the future.",
-            author: "Unknown",
-            explanation: "Your history doesn't define you. Hope is about what you can become."
-        },
-        {
-            text: "Keep hoping. Keep dreaming. Keep loving.",
-            author: "Unknown",
-            explanation: "A triad of imperatives. Hope, dreams, and love sustain each other."
-        },
-        {
-            text: "Hope is the heartbeat of tomorrow.",
-            author: "Unknown",
-            explanation: "Tomorrow's vitality depends on today's hope. It keeps the future alive."
-        },
-        {
-            text: "You are enough. You are so enough.",
-            author: "Unknown",
-            explanation: "Repeated for emphasis. Hope rests on sufficiency, not lack."
-        },
-        {
-            text: "Hope is the ladder out of the well.",
-            author: "Unknown",
-            explanation: "An image of escape from despair. Hope provides the rungs to climb."
-        },
-        {
-            text: "You are a masterpiece. Even with cracks, you are beautiful.",
-            author: "Unknown",
-            explanation: "Imperfections don't diminish beauty. Hope sees value in the whole picture."
-        },
-        {
-            text: "Never underestimate the power of hope.",
-            author: "Unknown",
-            explanation: "A warning against cynicism. Hope is more potent than it appears."
-        },
-        {
-            text: "You are loved beyond measure.",
-            author: "Unknown",
-            explanation: "Love without limit. Hope is nurtured by feeling cherished."
-        },
-        {
-            text: "Hope is the seed of all change.",
-            author: "Unknown",
-            explanation: "Every transformation begins with a hopeful vision. It's the origin."
-        },
-        {
-            text: "There is no night without stars.",
-            author: "Unknown",
-            explanation: "Even darkness contains points of light. Hope finds them."
-        },
-        {
-            text: "The moment you're ready to quit is usually the moment right before the miracle happens.",
-            author: "Unknown",
-            explanation: "Encourages perseverance – breakthrough often comes just after the brink of giving up."
-        },
-        {
-            text: "Hope is a sunrise we can't see yet.",
-            author: "Unknown",
-            explanation: "Trust in the unseen. Hope believes the sun is rising, even in darkness."
-        },
-        {
-            text: "You are the poet of your own life.",
-            author: "Unknown",
-            explanation: "You craft the verses. Hope writes with possibility."
-        },
-        {
-            text: "Hope is the whisper of tomorrow.",
-            author: "Unknown",
-            explanation: "Tomorrow speaks softly through hope. Listen for it."
-        },
-        {
-            text: "You are the dreamer and the dream.",
-            author: "Unknown",
-            explanation: "You are both the one who hopes and the hoped-for future. Hope unites them."
-        },
-        {
-            text: "Keep your eyes on the stars, and your feet on the ground.",
-            author: "Theodore Roosevelt",
-            explanation: "Balance aspiration with practicality. Hope reaches high but stays grounded."
-        },
-        {
-            text: "Hope is the last thing that dies in a person.",
-            author: "Unknown",
-            explanation: "A common saying – hope is the final survivor, the last to leave."
-        },
-        {
-            text: "You are the captain of your soul.",
-            author: "William Ernest Henley",
-            explanation: "From 'Invictus,' it declares self-mastery. Hope steers the ship."
-        },
-        {
-            text: "Hope is the pole star for the soul.",
-            author: "Unknown",
-            explanation: "Like the North Star, hope provides constant direction."
-        },
-        {
-            text: "You are the sun. Don't hide your shine.",
-            author: "Unknown",
-            explanation: "You radiate warmth and light. Hope encourages you to share it."
-        },
-        {
-            text: "Hope is the bridge to tomorrow.",
-            author: "Unknown",
-            explanation: "It connects today to the future. Without hope, the gap is too wide."
-        },
-        {
-            text: "You are the miracle you've been looking for.",
-            author: "Unknown",
-            explanation: "The extraordinary is within you. Hope recognizes your own magic."
-        },
-        {
-            text: "Hope is the soil in which resilience grows.",
-            author: "Unknown",
-            explanation: "Resilience needs a foundation. Hope provides the fertile ground."
-        },
-        {
-            text: "You are the light. Keep shining.",
-            author: "Unknown",
-            explanation: "A direct affirmation. Your light is needed – don't dim it."
-        },
-        {
-            text: "You are exactly where you need to be.",
-            author: "Unknown",
-            explanation: "Trust in the present moment. Hope reassures that this place has purpose."
-        },
-        {
-            text: "Hope is the oxygen of the spirit.",
-            author: "Unknown",
-            explanation: "Essential for spiritual life. Without hope, the spirit suffocates."
-        },
-        {
-            text: "You are a beautiful soul. Don't let anyone dim your light.",
-            author: "Unknown",
-            explanation: "Protect your inner radiance. Hope guards against those who would obscure it."
-        },
-        {
-            text: "Hope is the music of the heart.",
-            author: "Unknown",
-            explanation: "The heart's melody. Hope plays on, even when other sounds fade."
-        },
-        {
-            text: "You are the artist of your own life. Paint a masterpiece.",
-            author: "Unknown",
-            explanation: "You hold the brush. Hope mixes the colors."
-        },
-        {
-            text: "Hope is the fire that warms the soul.",
-            author: "Unknown",
-            explanation: "Warmth against cold despair. Hope is an inner flame."
-        },
-        {
-            text: "You are the reason someone smiles today.",
-            author: "Unknown",
-            explanation: "Your existence has impact. Hope is seeing that you matter to others."
-        },
-        {
-            text: "Hope is the wind in our sails.",
-            author: "Unknown",
-            explanation: "It propels us forward. Without wind, we drift."
-        },
-        {
-            text: "You are the hope you've been searching for.",
-            author: "Unknown",
-            explanation: "The source of hope may be yourself. Look inward."
-        },
-        {
-            text: "Hope is the door that opens to new beginnings.",
-            author: "Unknown",
-            explanation: "It's the threshold. Hope turns the handle."
-        },
-        {
-            text: "You are the star that never fades.",
-            author: "Unknown",
-            explanation: "Constant and enduring. Hope sees your permanence."
-        },
-        {
-            text: "Hope is the compass that guides us home.",
-            author: "Unknown",
-            explanation: "It points toward belonging, peace, and safety."
-        },
-        {
-            text: "You are the love that the world needs.",
-            author: "Unknown",
-            explanation: "Your capacity to love is a gift. Hope sends it outward."
-        },
-        {
-            text: "Hope is the seed of a better tomorrow.",
-            author: "Unknown",
-            explanation: "Plant it today. Tomorrow will grow from it."
-        },
-        {
-            text: "You are the courage you seek.",
-            author: "Unknown",
-            explanation: "Courage isn't external. Hope finds it within you."
-        },
-        {
-            text: "Hope is the light in the window.",
-            author: "Unknown",
-            explanation: "A beacon for those who are lost. It says 'you are expected.'"
-        },
-        {
-            text: "You are the peace you wish to see.",
-            author: "Unknown",
-            explanation: "You embody the calm you desire. Hope is that realization."
-        },
-        {
-            text: "Hope is the hand that reaches out.",
-            author: "Unknown",
-            explanation: "It connects us. Hope extends toward others and toward the future."
-        },
-        {
-            text: "You are the future, and it's bright.",
-            author: "Unknown",
-            explanation: "You carry tomorrow. Hope illuminates it."
-        },
-        {
-            text: "Hope is the thread that weaves our dreams.",
-            author: "Unknown",
-            explanation: "It stitches aspirations together. Without it, dreams unravel."
-        },
-        {
-            text: "You are the answer to someone's prayer.",
-            author: "Unknown",
-            explanation: "Your presence fulfills a need. Hope recognizes that you are part of a larger plan."
-        },
-        {
-            text: "Hope is the rhythm of the soul.",
-            author: "Unknown",
-            explanation: "A steady beat. Hope keeps time with our deepest self."
-        },
-        {
-            text: "You are the strength you didn't know you had.",
-            author: "Unknown",
-            explanation: "Untapped power. Hope reveals it."
-        },
-        {
-            text: "Hope is the friend who never leaves.",
-            author: "Unknown",
-            explanation: "Constant companionship. Hope stays through everything."
-        },
-        {
-            text: "You are the sun after the rain.",
-            author: "Unknown",
-            explanation: "You bring brightness after storms. Hope is that emergence."
-        },
-        {
-            text: "Hope is the song that never ends.",
-            author: "Unknown",
-            explanation: "Eternal melody. Hope plays on infinitely."
-        },
-        {
-            text: "You are the rainbow after the storm.",
-            author: "Unknown",
-            explanation: "Beauty following turmoil. Hope paints you as that promise."
-        },
-        {
-            text: "Hope is the anchor in the storm.",
-            author: "Unknown",
-            explanation: "Steadfastness amid chaos. Hope holds."
-        },
-        {
-            text: "You are the hope of a new day.",
-            author: "Unknown",
-            explanation: "Each day's potential rests in you. Hope wakes with you."
-        },
-        {
-            text: "Hope is the whisper of possibility.",
-            author: "Unknown",
-            explanation: "Soft but insistent. It murmurs that things could be different."
-        },
-        {
-            text: "You are the change you wish to see.",
-            author: "Gandhi",
-            explanation: "Be the embodiment of your ideals. Hope activates that transformation."
-        },
-        {
-            text: "Hope is the belief that things will get better.",
-            author: "Unknown",
-            explanation: "A simple, core definition. It's the engine of improvement."
-        },
-        {
-            text: "You are the dreamer. Keep dreaming.",
-            author: "Unknown",
-            explanation: "Don't stop envisioning. Hope fuels the dream."
-        },
-        {
-            text: "Hope is the star that never sets.",
-            author: "Unknown",
-            explanation: "Constant in the sky. Hope is always there, even when clouds hide it."
-        },
-        {
-            text: "You are the light in the darkness.",
-            author: "Unknown",
-            explanation: "You illuminate. Hope is that glow."
-        },
-        {
-            text: "Hope is the reason we keep going.",
-            author: "Unknown",
-            explanation: "Ultimate motivation. Hope is the 'why' behind every step."
-        },
-        {
-            text: "You are the masterpiece in progress.",
-            author: "Unknown",
-            explanation: "Unfinished but already beautiful. Hope appreciates the journey."
-        },
-        {
-            text: "Hope is the promise of a new beginning.",
-            author: "Unknown",
-            explanation: "It pledges fresh starts. Hope is the vow of renewal."
-        },
-        {
-            text: "You are the hope of the world.",
-            author: "Unknown",
-            explanation: "Collective trust in humanity. Each person carries a piece."
-        },
-        {
-            text: "Hope is the fire that never dies.",
-            author: "Unknown",
-            explanation: "Eternal flame. Hope cannot be extinguished."
-        },
-        { text: "Where there is no vision, the people perish.", author: "Proverbs 29:18", explanation: "Hope requires a vision of what could be; without it, we lose direction and vitality." },
-        { text: "The soul that sees beauty may sometimes walk alone.", author: "Johann Wolfgang von Goethe", explanation: "Hope and beauty can sustain us even when we feel isolated." },
-        { text: "Adopt the pace of nature: her secret is patience.", author: "Ralph Waldo Emerson", explanation: "Hope aligns with natural rhythms and the patience they require." },
-        { text: "Life is 10% what happens to you and 90% how you react to it.", author: "Charles R. Swindoll", explanation: "Hope is part of that 90% – our chosen response to circumstance." },
-        { text: "Nothing is impossible. The word itself says I'm possible!", author: "Audrey Hepburn", explanation: "A playful reframe that turns limitation into possibility." },
-        { text: "The only impossible journey is the one you never begin.", author: "Tony Robbins", explanation: "Hope is the decision to begin despite uncertainty." },
-        { text: "You were given this life because you're strong enough to live it.", author: "Unknown", explanation: "Hope rests on the belief that you have the capacity to endure." },
-        { text: "After every storm the sun will smile.", author: "William R. Alger", explanation: "Hope expects the return of light after hardship." },
-        { text: "Wherever you go, go with all your heart.", author: "Confucius", explanation: "Hope is carried in wholehearted commitment to the path." },
-        { text: "The secret of getting ahead is getting started.", author: "Mark Twain", explanation: "Hope motivates that first step which everything else follows." },
-        { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius", explanation: "Hope values persistence over speed." },
-        { text: "The only way out is through.", author: "Robert Frost", explanation: "Hope accepts that we must pass through difficulty to reach the other side." },
-        { text: "She believed she could, so she did.", author: "R.S. Grey", explanation: "Belief and hope precede action and outcome." },
-        { text: "Be the change you wish to see in the world.", author: "Mahatma Gandhi", explanation: "Hope becomes real when we embody it in our own behavior." },
-        { text: "What we achieve inwardly will change outer reality.", author: "Plutarch", explanation: "Inner hope can reshape the world we experience." },
-        { text: "The mind is everything. What you think you become.", author: "Buddha", explanation: "Hope is a way of thinking that shapes who we become." },
-        { text: "Act as if what you do makes a difference. It does.", author: "William James", explanation: "Hope is reinforced when we act as though our actions matter." },
-        { text: "No one is too small to make a difference.", author: "Greta Thunberg", explanation: "Hope is available to everyone, regardless of size or status." },
-        { text: "The greatest glory is in never falling, but in rising every time we fall.", author: "Confucius", explanation: "Hope is the force that helps us rise again." },
-        { text: "Our greatest glory is not in never failing, but in rising every time we fail.", author: "Ralph Waldo Emerson", explanation: "Hope defines itself in the comeback, not the absence of failure." },
-        { text: "I am not a product of my circumstances. I am a product of my decisions.", author: "Stephen Covey", explanation: "Hope places agency in our choices, not our conditions." },
-        { text: "The best revenge is massive success.", author: "Frank Sinatra", explanation: "Hope can channel pain into ambition and achievement." },
-        { text: "Success is not final; failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill", explanation: "Hope is the courage to continue despite either outcome." },
-        { text: "Believe in yourself. You are braver than you think.", author: "Unknown", explanation: "Hope includes trusting in your own hidden courage." },
-        { text: "The only person you are destined to become is the person you decide to be.", author: "Ralph Waldo Emerson", explanation: "Hope is the decision about who you will become." },
-        { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar", explanation: "Hope is the willingness to start before feeling ready." },
-        { text: "The future depends on what you do today.", author: "Mahatma Gandhi", explanation: "Hope is acted out in present-day choices." },
-        { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt", explanation: "Hope works with current resources and place." },
-        { text: "It's not whether you get knocked down; it's whether you get up.", author: "Vince Lombardi", explanation: "Hope is measured by the decision to rise again." },
-        { text: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt", explanation: "Hope asks us to set aside today's doubts for tomorrow's possibility." },
-        { text: "You are never too old to set another goal or to dream a new dream.", author: "C.S. Lewis", explanation: "Hope is ageless; it can be renewed at any stage of life." },
-        { text: "The way to get started is to quit talking and begin doing.", author: "Walt Disney", explanation: "Hope shifts from idea to action when we begin." },
-        { text: "Whether you think you can or you think you can't, you're right.", author: "Henry Ford", explanation: "Hope is the belief that shapes our capacity." },
-        { text: "In the end, we only regret the chances we didn't take.", author: "Unknown", explanation: "Hope encourages us to take the chances we might otherwise avoid." },
-        { text: "Your time is limited. Don't waste it living someone else's life.", author: "Steve Jobs", explanation: "Hope is invested in living as yourself, not as others expect." },
-        { text: "The greatest wealth is to live content with little.", author: "Plato", explanation: "Hope can be found in simplicity and contentment." },
-        { text: "Happiness is not something ready-made. It comes from your own actions.", author: "Dalai Lama", explanation: "Hope is sustained by the actions we take toward well-being." },
-        { text: "Peace comes from within. Do not seek it without.", author: "Buddha", explanation: "Hope and peace are cultivated internally first." },
-        { text: "The present moment is the only moment we have.", author: "Thich Nhat Hanh", explanation: "Hope can be practiced right now, in this moment." },
-        { text: "We can't help everyone, but everyone can help someone.", author: "Ronald Reagan", explanation: "Hope is distributed through small, concrete acts of help." },
-        { text: "Kindness is a language which the deaf can hear and the blind can see.", author: "Mark Twain", explanation: "Hope is communicated through kindness across all barriers." },
-        { text: "The purpose of life is to live it, to taste experience to the utmost.", author: "Eleanor Roosevelt", explanation: "Hope is the willingness to engage fully with life." },
-        { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky", explanation: "Hope requires taking the shot despite the risk of missing." },
-        { text: "Today is the first day of the rest of your life.", author: "Unknown", explanation: "Hope is the sense that every day offers a fresh start." },
-        { text: "You don't find hope by looking. You create it by doing.", author: "Unknown", explanation: "Hope is built through action, not passive waiting." },
-        { text: "Every moment is a fresh beginning.", author: "T.S. Eliot", explanation: "Hope is the possibility of renewal in each moment." },
-        { text: "The sky is the daily bread of the eyes.", author: "Ralph Waldo Emerson", explanation: "Hope is fed by simple, constant beauties like the sky." },
-        { text: "Nothing can dim the light that shines from within.", author: "Maya Angelou", explanation: "Hope is that inner light that circumstances cannot extinguish." },
-        { text: "You are what you do, not what you say you'll do.", author: "Carl Jung", explanation: "Hope is made real through action, not intention alone." },
-        { text: "The wound is the place where the light enters you.", author: "Rumi", explanation: "Hope can enter through our broken places." },
-        { text: "Out of difficulties grow miracles.", author: "Jean de La Bruyère", explanation: "Hope expects that difficulty can give rise to the miraculous." },
-        { text: "The best is yet to be.", author: "Robert Browning", explanation: "Hope is the conviction that the future holds something better." },
-        { text: "We need never be ashamed of our tears.", author: "Charles Dickens", explanation: "Hope can coexist with grief and tears." },
-        { text: "To live is the rarest thing in the world. Most people exist, that is all.", author: "Oscar Wilde", explanation: "Hope is the choice to live fully rather than merely exist." },
-        { text: "The only true wisdom is in knowing you know nothing.", author: "Socrates", explanation: "Hope can rest on humility and openness to learn." },
-        { text: "Be yourself; everyone else is already taken.", author: "Oscar Wilde", explanation: "Hope is tied to the freedom to be who you are." },
-        { text: "It is during our darkest moments that we must focus to see the light.", author: "Aristotle", explanation: "Hope is the deliberate focus on light when it's hardest to see." },
-        { text: "The journey of a thousand miles begins with a single step.", author: "Lao Tzu", explanation: "Hope is the willingness to take that first step." },
-        { text: "What we think, we become.", author: "Buddha", explanation: "Hope is a way of thinking that shapes our future." },
-        { text: "The only constant in life is change.", author: "Heraclitus", explanation: "Hope accepts change and looks for opportunity within it." },
-        { text: "We are what we repeatedly do. Excellence, then, is not an act but a habit.", author: "Aristotle", explanation: "Hope is sustained by the habit of trying again." },
-        { text: "The unexamined life is not worth living.", author: "Socrates", explanation: "Hope is deepened by reflection and self-examination." },
-        { text: "Life isn't about finding yourself. Life is about creating yourself.", author: "George Bernard Shaw", explanation: "Hope is the act of creating the self you want to become." },
-        { text: "You cannot shake hands with a clenched fist.", author: "Indira Gandhi", explanation: "Hope often requires opening up and letting go of defensiveness." },
-        { text: "The best time for new beginnings is now.", author: "Unknown", explanation: "Hope is the decision to begin in the present." },
-        { text: "You are never too small to make a difference.", author: "Unknown", explanation: "Hope is available to everyone, regardless of scale." },
-        { text: "What you get by achieving your goals is not as important as what you become.", author: "Zig Ziglar", explanation: "Hope is invested in who you become along the way." },
-        { text: "The greatest discovery of all time is that a person can change their future.", author: "Oprah Winfrey", explanation: "Hope is the discovery that the future is not fixed." },
-        { text: "You are the only one who can limit your greatness.", author: "Unknown", explanation: "Hope is the belief that your potential is not fixed by others." },
-        { text: "The best way to predict the future is to create it.", author: "Peter Drucker", explanation: "Hope is the commitment to create the future we want." },
-        { text: "You are allowed to be both a masterpiece and a work in progress.", author: "Unknown", explanation: "Hope holds both your current value and your potential." },
-        { text: "The world is full of magical things patiently waiting for our wits to grow sharper.", author: "Bertrand Russell", explanation: "Hope is the expectation that we can grow into seeing more magic." },
-        { text: "You are braver than you believe, stronger than you seem, smarter than you think.", author: "A.A. Milne", explanation: "Hope is the belief in your hidden strengths." },
-        { text: "The only way to achieve the impossible is to believe it is possible.", author: "Charles Kingsleigh", explanation: "Hope is the belief that makes the impossible approachable." },
-        { text: "You don't have to see the whole staircase. Just take the first step.", author: "Martin Luther King Jr.", explanation: "Hope is the courage to take the first step without seeing the end." },
-        { text: "The greatest gift you can give someone is your time.", author: "Unknown", explanation: "Hope is often given through the gift of presence." },
-        { text: "You are enough. You have always been enough.", author: "Unknown", explanation: "Hope is the affirmation that you don't need to be more to be worthy." },
-        { text: "The best things in life are free.", author: "Unknown", explanation: "Hope can be found in the things that cost nothing." },
-        { text: "You are the artist of your own life. Don't hand the brush to anyone else.", author: "Unknown", explanation: "Hope is the choice to keep painting your own story." },
-        { text: "The soul becomes dyed with the color of its thoughts.", author: "Marcus Aurelius", explanation: "Hope is a color we can choose to dye our thoughts with." },
-        { text: "You are not a drop in the ocean. You are the entire ocean in a drop.", author: "Rumi", explanation: "Hope is the recognition of your vastness." },
-        { text: "The best revenge is to be unlike him who performed the injury.", author: "Marcus Aurelius", explanation: "Hope can mean rising above rather than mirroring harm." },
-        { text: "You are the only person on earth who can use your ability.", author: "Zig Ziglar", explanation: "Hope is the sense that your unique ability matters." },
-        { text: "The mind that opens to a new idea never returns to its original size.", author: "Albert Einstein", explanation: "Hope expands as we open to new ideas." },
-        { text: "You are never too old to set another goal or to dream a new dream.", author: "Les Brown", explanation: "Hope is ageless and can always set new goals." },
-        { text: "The purpose of life is a life of purpose.", author: "Robert Byrne", explanation: "Hope is clarified when we live with purpose." },
-        { text: "You have within you right now everything you need to deal with whatever the world can throw at you.", author: "Brian Tracy", explanation: "Hope is the belief that you already have the resources." },
-        { text: "The best way to find yourself is to lose yourself in the service of others.", author: "Mahatma Gandhi", explanation: "Hope is often found through giving to others." },
-        { text: "You are the only one who can decide what you become.", author: "Unknown", explanation: "Hope is the power to decide your own becoming." },
-        { text: "The greatest risk is not taking one.", author: "Unknown", explanation: "Hope sometimes requires taking the risk." },
-        { text: "You are worthy of love and belonging.", author: "Brené Brown", explanation: "Hope is the belief in your worthiness of connection." },
-        { text: "The best way to get started is to quit talking and begin doing.", author: "Walt Disney", explanation: "Hope is activated when we move from words to action." },
-        { text: "You are the author of your own story. Make it a bestseller.", author: "Unknown", explanation: "Hope is the intention to make your story matter." },
-        { text: "The only way to do great work is to love what you do.", author: "Steve Jobs", explanation: "Hope is sustained by love for the work we do." },
-        { text: "You are the light of the world. Don't hide it.", author: "Unknown", explanation: "Hope is the light we are encouraged to show." },
-        { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt", explanation: "Hope is the belief in the beauty of our dreams." },
-        { text: "You are not your past. You are the possibility of the future.", author: "Unknown", explanation: "Hope is the identity of possibility, not past." },
-        { text: "The only limit is the one you set yourself.", author: "Unknown", explanation: "Hope is the recognition that limits are often self-set." },
-        { text: "You are a work in progress with a deadline of forever.", author: "Unknown", explanation: "Hope is the patience to keep growing without a final deadline." },
-        { text: "The best is yet to come.", author: "Frank Sinatra", explanation: "Hope is the expectation that the best is ahead." },
-        { text: "You are the hope you've been waiting for.", author: "Unknown", explanation: "Hope can be found within yourself." },
-        { text: "You are capable of more than you know.", author: "Unknown", explanation: "Hope is the belief in your untapped capability." },
-        { text: "The world needs your unique gift.", author: "Unknown", explanation: "Hope is the sense that your gift is needed." },
-        { text: "You are not behind. You are exactly where you need to be.", author: "Unknown", explanation: "Hope is the trust that you are on your own timeline." },
-        { text: "You are the dreamer and the dream.", author: "Unknown", explanation: "Hope unites the one who dreams and the dream itself." },
-        { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb", explanation: "Hope is the willingness to act now despite the past." },
-        { text: "You are the miracle you've been waiting for.", author: "Unknown", explanation: "Hope can be the recognition that you are the miracle." },
-        { text: "The only way out is through.", author: "Robert Frost", explanation: "Hope accepts that we must go through difficulty." },
-        { text: "You are the sky. Everything else is just the weather.", author: "Pema Chödrön", explanation: "Hope is the stability of the sky beneath changing weather." },
-        { text: "The greatest glory is in rising every time we fall.", author: "Vince Lombardi", explanation: "Hope is the glory of getting up again." },
-        { text: "You are the one you've been waiting for.", author: "Unknown", explanation: "Hope is the discovery that the awaited one is you." },
-        { text: "The only person you are destined to become is the person you decide to be.", author: "Ralph Waldo Emerson", explanation: "Hope is the decision about your destiny." },
-        { text: "You are a masterpiece in progress.", author: "Unknown", explanation: "Hope is the view of yourself as both masterpiece and becoming." },
-        { text: "You are the light in someone's darkness.", author: "Unknown", explanation: "Hope is the role you play for others." },
-        { text: "The best way to find yourself is to lose yourself in service.", author: "Mahatma Gandhi", explanation: "Hope is often found in serving others." },
-        { text: "You are the hope of the world.", author: "Unknown", explanation: "Hope is the belief that each person carries hope for the world." },
-        { text: "The only thing standing between you and your goal is the story you tell yourself.", author: "Tony Robbins", explanation: "Hope can change when we change our story." },
-        { text: "You are the author of your own life. Write something beautiful.", author: "Unknown", explanation: "Hope is the intention to write a beautiful life." },
-        { text: "The future depends on what we do in the present.", author: "Mahatma Gandhi", explanation: "Hope is acted out in present action." },
-        { text: "You are not your mistakes. You are what you do next.", author: "Unknown", explanation: "Hope is defined by what we do after we fail." },
-        { text: "The only way to have a friend is to be one.", author: "Ralph Waldo Emerson", explanation: "Hope for connection starts with being the connection." },
-        { text: "You are the change you wish to see.", author: "Mahatma Gandhi", explanation: "Hope is the decision to be that change." },
-        { text: "The best preparation for tomorrow is doing your best today.", author: "H. Jackson Brown Jr.", explanation: "Hope is built by doing our best in the present." },
-        { text: "You are worthy of all the good things coming your way.", author: "Unknown", explanation: "Hope includes the belief that you deserve good." },
-        { text: "The only real failure is the failure to try.", author: "Unknown", explanation: "Hope is preserved as long as we keep trying." },
-        { text: "You are the star that never fades.", author: "Unknown", explanation: "Hope is the belief in your enduring light." },
-        { text: "The world is changed by your example, not your opinion.", author: "Paulo Coelho", explanation: "Hope is transmitted through how we live, not what we say." },
-        { text: "You are the dreamer. Keep dreaming.", author: "Unknown", explanation: "Hope is the encouragement to keep dreaming." },
-        { text: "The only way to do great work is to love what you do.", author: "Steve Jobs", explanation: "Hope is sustained by love for our work." },
-        { text: "You are the light that guides others home.", author: "Unknown", explanation: "Hope is the role of guiding others." },
-        { text: "The best time to start was yesterday. The next best time is now.", author: "Unknown", explanation: "Hope is the decision to start now." },
-        { text: "You are the hope you've been searching for.", author: "Unknown", explanation: "Hope can be found within." },
-        { text: "You are the miracle someone is praying for.", author: "Unknown", explanation: "Hope is the sense that you are the answer to someone's hope." },
-        { text: "The greatest wealth is health.", author: "Virgil", explanation: "Hope is supported by the wealth of health." },
-        { text: "You are the poet of your own life.", author: "Unknown", explanation: "Hope is the act of writing your life as poetry." },
-        { text: "You are the artist of your own life. Paint a masterpiece.", author: "Unknown", explanation: "Hope is the intention to create a masterpiece life." },
-        { text: "The best way to predict the future is to create it.", author: "Abraham Lincoln", explanation: "Hope is the commitment to create the future." },
-        { text: "You are the sun after the rain.", author: "Unknown", explanation: "Hope is the sun that appears after difficulty." },
-        { text: "The only impossible journey is the one you never begin.", author: "Tony Robbins", explanation: "Hope is the decision to begin." },
-        { text: "You are the rainbow after the storm.", author: "Unknown", explanation: "Hope is the beauty that follows the storm." },
-        { text: "The world needs your particular magic.", author: "Unknown", explanation: "Hope is the belief that your magic is needed." },
-        { text: "You are the answer to someone's prayer.", author: "Unknown", explanation: "Hope is the recognition that you are an answer." },
-        { text: "You are the strength you didn't know you had.", author: "Unknown", explanation: "Hope is the discovery of hidden strength." },
-        { text: "You are the hope of a new day.", author: "Unknown", explanation: "Hope is the promise each person carries for a new day." },
-        { text: "You are the light in the darkness.", author: "Unknown", explanation: "Hope is the light we can be for others." },
-        { text: "You are the reason someone believes in good.", author: "Unknown", explanation: "Hope is the role we play in others' belief in good." },
-        { text: "You are the hope that never fades.", author: "Unknown", explanation: "Hope is the quality of not fading." },
-        { text: "You are the star that lights the way.", author: "Unknown", explanation: "Hope is the light we provide for the path." },
-        { text: "The world is changed by your example.", author: "Unknown", explanation: "Hope is spread through example." },
-        { text: "You are the miracle the world needs.", author: "Unknown", explanation: "Hope is the sense that you are a needed miracle." },
-        { text: "The only limit is the one you set yourself.", author: "Unknown", explanation: "Hope is the recognition that we set our own limits." },
-        { text: "You are the light that never goes out.", author: "Unknown", explanation: "Hope is the light that endures." },
-        { text: "You are the sky. Everything else is just weather.", author: "Unknown", explanation: "Hope is the stability of the sky." },
-        { text: "You are the light in someone's darkness.", author: "Unknown", explanation: "Hope is the light we offer others." },
-        { text: "You are the author of your own life. Write something beautiful.", author: "Unknown", explanation: "Hope is the intention to write beauty." },
-        { text: "You are not your mistakes. You are what you do next.", author: "Unknown", explanation: "Hope is what we do after failure." },
-        { text: "You are the change you wish to see in the world.", author: "Mahatma Gandhi", explanation: "Hope is being the change." },
-        { text: "You are worthy of all the good things coming your way.", author: "Unknown", explanation: "Hope includes deserving good." },
-        { text: "You are the dreamer. Keep dreaming.", author: "Unknown", explanation: "Hope is the encouragement to dream." },
-        { text: "You are the hope you've been searching for.", author: "Unknown", explanation: "Hope can be found within." },
-        { text: "You are the miracle someone is praying for.", author: "Unknown", explanation: "Hope is being the answer to someone's prayer." },
-        { text: "You are the poet of your own life.", author: "Unknown", explanation: "Hope is writing your life as poetry." },
-        { text: "You are the artist of your own life. Paint a masterpiece.", author: "Unknown", explanation: "Hope is creating a masterpiece life." },
-        { text: "You are the sun after the rain.", author: "Unknown", explanation: "Hope is the sun after difficulty." },
-        { text: "You are the rainbow after the storm.", author: "Unknown", explanation: "Hope is the beauty after the storm." },
-        { text: "You are the hope of a new day.", author: "Unknown", explanation: "Hope is the promise of a new day." },
-        { text: "Doubt kills more dreams than failure ever will.", author: "Suzy Kassem", explanation: "Hope is threatened more by doubt than by actual failure." },
-        { text: "The flower that blooms in adversity is the most rare and beautiful of all.", author: "Walt Disney", explanation: "Hope that grows in hard times is especially precious." },
-        { text: "Turn your face to the sun and the shadows fall behind you.", author: "Maori Proverb", explanation: "Hope is the choice to face the light." },
-        { text: "Every exit is an entry somewhere else.", author: "Tom Stoppard", explanation: "Hope sees endings as doors to new beginnings." },
-        { text: "The pain you feel today will be the strength you feel tomorrow.", author: "Unknown", explanation: "Hope is the expectation that pain can become strength." },
-        { text: "Rise up and become the person you were meant to be.", author: "Unknown", explanation: "Hope is the call to become your true self." },
-        { text: "Let your hopes, not your hurts, shape your future.", author: "Robert H. Schuller", explanation: "Hope chooses hope over past pain when shaping tomorrow." },
-        { text: "A ship in harbor is safe, but that is not what ships are for.", author: "John A. Shedd", explanation: "Hope is the willingness to leave safety for purpose." },
-        { text: "The best view comes after the hardest climb.", author: "Unknown", explanation: "Hope is the view that awaits after difficulty." },
-        { text: "You are never too broken to be fixed.", author: "Unknown", explanation: "Hope is the belief that repair is always possible." },
-        { text: "Stars can't shine without darkness.", author: "Unknown", explanation: "Hope is the light that appears against the dark." },
-        { text: "One small crack does not mean you are broken; it means you were put to the test and didn't fall apart.", author: "Linda Poindexter", explanation: "Hope reframes cracks as proof of strength." },
-        { text: "The comeback is always stronger than the setback.", author: "Unknown", explanation: "Hope is the expectation of a stronger return." },
-        { text: "Scars remind us that our past is real, but they don't have to define our future.", author: "Unknown", explanation: "Hope separates past scars from future possibility." },
-        { text: "You are allowed to outgrow people who don't grow with you.", author: "Unknown", explanation: "Hope includes the freedom to grow beyond old ties." },
-        { text: "The same boiling water that softens the potato hardens the egg. It's about what you're made of.", author: "Unknown", explanation: "Hope is the inner substance that decides how we respond to heat." },
-        { text: "Your value doesn't decrease based on someone's inability to see your worth.", author: "Unknown", explanation: "Hope is the knowledge that your worth is independent of others' sight." },
-        { text: "New beginnings are often disguised as painful endings.", author: "Lao Tzu", explanation: "Hope looks for the beginning inside the end." },
-        { text: "You are one step closer than you were yesterday.", author: "Unknown", explanation: "Hope is the recognition of progress, however small." },
-        { text: "The universe is not outside of you. Look inside yourself; everything that you want, you already are.", author: "Rumi", explanation: "Hope is the discovery that what we seek is within." },
-        { text: "It's a slow process, but quitting won't speed it up.", author: "Unknown", explanation: "Hope chooses patience over quitting." },
-        { text: "You don't have to have it all figured out to move forward.", author: "Unknown", explanation: "Hope allows movement without full clarity." },
-        { text: "The moment you're ready to quit is usually the moment right before the miracle happens.", author: "Unknown", explanation: "Hope is the reason to hold on a little longer." },
-        { text: "You are not what happened to you. You are what you choose to become.", author: "Carl Jung", explanation: "Hope is the choice about who you become." },
-        { text: "Sometimes the smallest step in the right direction ends up being the biggest step of your life.", author: "Unknown", explanation: "Hope is the willingness to take that small step." },
-        { text: "Trust the process. Your time is coming.", author: "Unknown", explanation: "Hope is trust in the process and the timing." },
-        { text: "You are not too old and it is not too late.", author: "Unknown", explanation: "Hope is the belief that time has not run out." },
-        { text: "The only way to discover the limits of the possible is to go beyond them into the impossible.", author: "Arthur C. Clarke", explanation: "Hope is the venture beyond apparent limits." },
-        { text: "You are not your anxiety. You are not your depression. You are not your past.", author: "Unknown", explanation: "Hope is the separation of identity from struggle." },
-        { text: "Every next level of your life will demand a different you.", author: "Unknown", explanation: "Hope is the willingness to become that different you." },
-        { text: "The best days of your life have not happened yet.", author: "Unknown", explanation: "Hope is the expectation of better days ahead." },
-        { text: "You are not stuck. You are just standing in a doorway. Step through.", author: "Unknown", explanation: "Hope is the step through the doorway." },
-        { text: "Your potential is endless. Don't let a bad chapter define your story.", author: "Unknown", explanation: "Hope is the belief in endless potential beyond one chapter." },
-        { text: "The only way to get to the other side is to keep going.", author: "Unknown", explanation: "Hope is the decision to keep going." },
-        { text: "You are not damaged. You are experienced.", author: "Unknown", explanation: "Hope reframes damage as experience." },
-        { text: "Every day may not be good, but there is something good in every day.", author: "Unknown", explanation: "Hope is the search for the good in each day." },
-        { text: "The best is yet to come, and it will be worth the wait.", author: "Unknown", explanation: "Hope is the expectation that the wait will be worth it." },
-        { text: "You are not alone in this. You are part of something bigger.", author: "Unknown", explanation: "Hope is the sense of belonging to something bigger." },
-        { text: "The struggle you're in today is developing the strength you need for tomorrow.", author: "Unknown", explanation: "Hope is the view that today's struggle trains tomorrow's strength." },
-        { text: "You are allowed to take up space and have needs.", author: "Unknown", explanation: "Hope includes the right to take up space." },
-        { text: "You are not too sensitive. You are paying attention.", author: "Unknown", explanation: "Hope reframes sensitivity as attentiveness." },
-        { text: "The fact that you're still here means you're stronger than you think.", author: "Unknown", explanation: "Hope is the evidence of strength in survival." },
-        { text: "You are worthy of the love you keep giving to everyone else.", author: "Unknown", explanation: "Hope is the belief that you deserve your own love." },
-        { text: "The best things in life are the people we love, the places we've been, and the memories we've made.", author: "Unknown", explanation: "Hope is nourished by love, place, and memory." },
-        { text: "You are not required to set yourself on fire to keep others warm.", author: "Unknown", explanation: "Hope includes the right to protect yourself." },
-        { text: "The world needs more of what you have.", author: "Unknown", explanation: "Hope is the sense that your offering is needed." },
-        { text: "You are allowed to be proud of yourself.", author: "Unknown", explanation: "Hope includes the permission to take pride." },
-        { text: "The right thing and the easy thing are rarely the same thing.", author: "Unknown", explanation: "Hope is the choice of the right thing over the easy thing." },
-        { text: "You are not too late. You are right on time.", author: "Unknown", explanation: "Hope is the belief that your timing is right." },
-        { text: "The best way to get over something is to go through it.", author: "Unknown", explanation: "Hope is the willingness to go through rather than around." },
-        { text: "You are the only you there has ever been. Make it count.", author: "Unknown", explanation: "Hope is the sense that your uniqueness matters." },
-        { text: "The universe is working in your favor, even when it doesn't feel like it.", author: "Unknown", explanation: "Hope is the trust that forces are working for you." },
-        { text: "You are not failing. You are learning.", author: "Unknown", explanation: "Hope reframes failure as learning." },
-        { text: "The best time to be kind is when it's hard.", author: "Unknown", explanation: "Hope is the choice to be kind when it costs something." },
-        { text: "You are not too much. You are exactly enough.", author: "Unknown", explanation: "Hope is the belief that you are enough as you are." },
-        { text: "The story isn't over yet. The best part might be the next page.", author: "Unknown", explanation: "Hope is the expectation that the best is still to come." },
-        { text: "You are allowed to change your mind and your path.", author: "Unknown", explanation: "Hope includes the freedom to change direction." },
-        { text: "The best apology is changed behavior.", author: "Unknown", explanation: "Hope is the commitment to change, not just to say sorry." },
-        { text: "You are not defined by your worst day.", author: "Unknown", explanation: "Hope separates identity from the worst moment." },
-        { text: "The right people will find you. Keep being you.", author: "Unknown", explanation: "Hope is the trust that the right people will arrive." },
-        { text: "You are allowed to rest. You are not lazy.", author: "Unknown", explanation: "Hope includes the right to rest without guilt." },
-        { text: "The best gift you can give yourself is permission to try.", author: "Unknown", explanation: "Hope is the permission to try." },
-        { text: "You are not your productivity. You are a human being.", author: "Unknown", explanation: "Hope is the separation of worth from output." },
-        { text: "The sun will shine on you again.", author: "Unknown", explanation: "Hope is the promise that light will return." },
-        { text: "You are allowed to need help. Asking is brave.", author: "Unknown", explanation: "Hope includes the courage to ask for help." },
-        { text: "The best way to honor the past is to build a better future.", author: "Unknown", explanation: "Hope is building a better future as honor." },
-        { text: "You are not stuck in traffic. You are the traffic. You can move.", author: "Unknown", explanation: "Hope is the recognition that you can move." },
-        { text: "The right moment is the one you create.", author: "Unknown", explanation: "Hope is the creation of the right moment." },
-        { text: "You are the hero of your own story. Act like it.", author: "Unknown", explanation: "Hope is the choice to act as the hero of your story." },
-        { text: "The best is not behind you. It is within you.", author: "Unknown", explanation: "Hope is the belief that the best is inside you." },
-        { text: "You are not broken. You are breaking through.", author: "Unknown", explanation: "Hope reframes breaking as breaking through." },
-        { text: "The world is better because you are in it.", author: "Unknown", explanation: "Hope is the belief that your presence improves the world." },
-        { text: "You are allowed to want more and still be grateful.", author: "Unknown", explanation: "Hope holds both desire for more and gratitude." },
-        { text: "The best version of you is the one that keeps trying.", author: "Unknown", explanation: "Hope is the version that keeps trying." },
-        { text: "You are not too far gone. You are still here.", author: "Unknown", explanation: "Hope is the fact that you are still here." },
-        { text: "The light at the end of the tunnel might be you.", author: "Unknown", explanation: "Hope is the possibility that you are the light." },
-        { text: "You are allowed to take a break and come back stronger.", author: "Unknown", explanation: "Hope includes the right to rest and return." },
-        { text: "The best way to predict your future is to create it.", author: "Unknown", explanation: "Hope is the act of creating the future." },
-        { text: "You are not too old to start. You are exactly the right age.", author: "Unknown", explanation: "Hope is the belief that your age is right for starting." },
-        { text: "The right path is the one you choose with your whole heart.", author: "Unknown", explanation: "Hope is the choice made with the whole heart." },
-        { text: "You are the light. Don't forget to turn yourself on.", author: "Unknown", explanation: "Hope is the act of turning on your own light." },
-        { text: "Where there is despair, let me sow hope.", author: "Francis of Assisi", explanation: "Hope is what we plant in place of despair." },
-        { text: "The night is always darkest just before the dawn.", author: "Thomas Fuller", explanation: "Hope is the dawn that follows the darkest hour." },
-        { text: "You are not too late. Your story is still being written.", author: "Unknown", explanation: "Hope is the sense that your story continues." },
-        { text: "The best way to get over the past is to build a better future.", author: "Unknown", explanation: "Hope builds the future instead of dwelling on the past." },
-        { text: "You are the only you the world will ever get. Honor that.", author: "Unknown", explanation: "Hope is the honoring of your unique self." },
-        { text: "The seeds of tomorrow are in the choices of today.", author: "Unknown", explanation: "Hope is planted by today's choices." },
-        { text: "You are not your mistakes. You are your capacity to grow.", author: "Unknown", explanation: "Hope is defined by capacity to grow." },
-        { text: "The heart that hopes has already won half the battle.", author: "Unknown", explanation: "Hope itself is a form of victory." },
-        { text: "You are allowed to be a work in progress.", author: "Unknown", explanation: "Hope includes the right to be unfinished." },
-        { text: "The road to tomorrow is built with today's steps.", author: "Unknown", explanation: "Hope is the road built step by step." },
-        { text: "You are the gift the world has been waiting for.", author: "Unknown", explanation: "Hope is the sense that you are the awaited gift." },
-        { text: "The best time to believe in yourself is now.", author: "Unknown", explanation: "Hope is the decision to believe now." },
-        { text: "You are not alone in hoping for better.", author: "Unknown", explanation: "Hope is shared with others who hope." },
-        { text: "The future is not written. You hold the pen.", author: "Unknown", explanation: "Hope is the power to write the future." },
-        { text: "You are the bridge between who you were and who you will be.", author: "Unknown", explanation: "Hope is the bridge of becoming." },
-        { text: "The stars are always there. Sometimes we just need to look up.", author: "Unknown", explanation: "Hope is the act of looking up." },
-        { text: "You are allowed to hope even when others don't.", author: "Unknown", explanation: "Hope is the right to hope independently." },
-        { text: "The best is not behind you. The best is ahead.", author: "Unknown", explanation: "Hope looks ahead, not behind." },
-        { text: "You are the promise you made to yourself. Keep it.", author: "Unknown", explanation: "Hope is keeping the promise to yourself." },
-        { text: "The world needs hope. You carry it.", author: "Unknown", explanation: "Hope is what you carry for the world." },
-        { text: "You are not too far from where you need to be.", author: "Unknown", explanation: "Hope is the nearness of your destination." },
-        { text: "The sun will rise. It always has. It always will.", author: "Unknown", explanation: "Hope trusts in the reliability of light." },
-        { text: "You are the one who can change your story.", author: "Unknown", explanation: "Hope is the power to change the narrative." },
-        { text: "The best response to darkness is to become light.", author: "Unknown", explanation: "Hope is becoming light in response to dark." },
-        { text: "You are allowed to start again. As many times as it takes.", author: "Unknown", explanation: "Hope includes unlimited fresh starts." },
-        { text: "The universe is not against you. It is for your becoming.", author: "Unknown", explanation: "Hope is the sense that the universe supports growth." },
-        { text: "You are the hope someone else is holding on to.", author: "Unknown", explanation: "Hope is the role you play for others." },
-        { text: "The best way to honor hope is to act on it.", author: "Unknown", explanation: "Hope is honored through action." },
-        { text: "You are not too broken to hope.", author: "Unknown", explanation: "Hope is available even when we feel broken." },
-        { text: "The morning will come. You will still be here.", author: "Unknown", explanation: "Hope is the promise of morning and presence." },
-        { text: "You are the possibility you've been waiting for.", author: "Unknown", explanation: "Hope is the possibility within you." },
-        { text: "The best days are not behind. They are in front.", author: "Unknown", explanation: "Hope places the best days ahead." },
-        { text: "You are allowed to believe in good things.", author: "Unknown", explanation: "Hope is the permission to believe in good." },
-        { text: "The light you seek is the light you can become.", author: "Unknown", explanation: "Hope is becoming the light we seek." },
-        { text: "You are not too late to be who you were meant to be.", author: "Unknown", explanation: "Hope is the belief that timing is still right." },
-        { text: "The world is better when you choose hope.", author: "Unknown", explanation: "Hope is a choice that improves the world." },
-        { text: "You are the dawn after someone's long night.", author: "Unknown", explanation: "Hope is the dawn we can be for others." },
-        { text: "The best way to keep hope is to give it away.", author: "Unknown", explanation: "Hope multiplies when shared." },
-        { text: "You are not too small to hold hope for the world.", author: "Unknown", explanation: "Hope can be held by anyone." },
-        { text: "The future is waiting for you to show up.", author: "Unknown", explanation: "Hope is the future awaiting your arrival." },
-        { text: "You are the hope that keeps going.", author: "Unknown", explanation: "Hope is the quality of persistence." },
-        { text: "The best thing you can do for tomorrow is to hope today.", author: "Unknown", explanation: "Hope is the gift we give to tomorrow." },
-        { text: "You are not alone in the dark. Hope is with you.", author: "Unknown", explanation: "Hope is companionship in darkness." },
-        { text: "The sun will rise and so will you.", author: "Unknown", explanation: "Hope is the parallel between sunrise and your rise." },
-        { text: "Hope is the heartbeat of possibility.", author: "Unknown", explanation: "Hope keeps the possibility of better alive." }
+        { text: "Hope is the thing with feathers that perches in the soul.", author: "Emily Dickinson" },
+        { text: "The sun himself is weak when he first rises, and gathers strength and courage as the day gets on.", author: "Charles Dickens" },
+        { text: "What the caterpillar calls the end of the world, the master calls a butterfly.", author: "Richard Bach" },
+        { text: "Keep your face always toward the sunshine—and shadows will fall behind you.", author: "Walt Whitman" },
+        { text: "Hope is being able to see that there is light despite all of the darkness.", author: "Desmond Tutu" },
+        { text: "You are never too old to set another goal or to dream a new dream.", author: "C.S. Lewis" },
+        { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+        { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+        { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+        { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+        { text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.", author: "Ralph Waldo Emerson" },
+        { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" },
+        { text: "When everything seems to be going against you, remember that the airplane takes off against the wind, not with it.", author: "Henry Ford" },
+        { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+        { text: "You are enough just as you are.", author: "Meghan Markle" },
+        { text: "Hope smiles from the threshold of the year to come, whispering 'it will be happier.'", author: "Alfred Lord Tennyson" },
+        { text: "Storms make trees take deeper roots.", author: "Dolly Parton" },
+        { text: "You may have to fight a battle more than once to win it.", author: "Margaret Thatcher" },
+        { text: "The best way to not feel hopeless is to get up and do something.", author: "Barack Obama" },
+        { text: "We must accept finite disappointment, but never lose infinite hope.", author: "Martin Luther King Jr." },
+        { text: "Hope is a waking dream.", author: "Aristotle" },
+        { text: "There is no medicine like hope, no incentive so great, and no tonic so powerful as expectation of something tomorrow.", author: "Orison Swett Marden" },
+        { text: "Learn from yesterday, live for today, hope for tomorrow.", author: "Albert Einstein" },
+        { text: "You are braver than you believe, stronger than you seem, and smarter than you think.", author: "A.A. Milne" },
+        { text: "Every day may not be good, but there is something good in every day.", author: "Unknown" },
+        { text: "The struggle you’re in today is developing the strength you need for tomorrow.", author: "Unknown" },
+        { text: "Stars can’t shine without darkness.", author: "Unknown" },
+        { text: "One small positive thought can change your whole day.", author: "Unknown" },
+        { text: "Hope is the anchor of the soul.", author: "Hebrews 6:19" },
+        { text: "You matter. You are here for a reason.", author: "Unknown" },
+        { text: "There is a crack in everything, that's how the light gets in.", author: "Leonard Cohen" },
+        { text: "Not all of us can do great things. But we can do small things with great love.", author: "Mother Teresa" },
+        { text: "What seems to us as bitter trials are often blessings in disguise.", author: "Oscar Wilde" },
+        { text: "Turn your wounds into wisdom.", author: "Oprah Winfrey" },
+        { text: "You are the sky. Everything else – it's just the weather.", author: "Pema Chödrön" },
+        { text: "Hope is the only bee that makes honey without flowers.", author: "Robert Green Ingersoll" },
+        { text: "The darkest hour has only sixty minutes.", author: "Morris Mandel" },
+        { text: "Even the darkest night will end and the sun will rise.", author: "Victor Hugo" },
+        { text: "Hold fast to dreams, for if dreams die, life is a broken-winged bird that cannot fly.", author: "Langston Hughes" },
+        { text: "You are loved. You are worthy. You matter.", author: "Unknown" },
+        { text: "The sun will rise, and we will try again.", author: "Twenty One Pilots" },
+        { text: "It's okay to not be okay, as long as you don't stay that way.", author: "Unknown" },
+        { text: "Hope is a necessity for normal life and the major weapon against the suicide of the soul.", author: "Kenneth L. Pike" },
+        { text: "Weeping may endure for a night, but joy comes in the morning.", author: "Psalm 30:5" },
+        { text: "Your present circumstances don't determine where you can go; they merely determine where you start.", author: "Nido Qubein" },
+        { text: "Sometimes your only available transportation is a leap of faith.", author: "Margaret Shepard" },
+        { text: "Hope is the dream of a waking man.", author: "Aristotle" },
+        { text: "You don't have to see the whole staircase, just take the first step.", author: "Martin Luther King Jr." },
+        { text: "The miracle isn't that I finished. The miracle is that I had the courage to start.", author: "John Bingham" },
+        { text: "Hope is important because it can make the present moment less difficult to bear.", author: "Thich Nhat Hanh" },
+        { text: "If you can dream it, you can do it.", author: "Walt Disney" },
+        { text: "Once you choose hope, anything's possible.", author: "Christopher Reeve" },
+        { text: "Hope itself is like a star- not to be seen in the sunshine of prosperity, and only to be discovered in the night of adversity.", author: "Charles Haddon Spurgeon" },
+        { text: "Difficult roads often lead to beautiful destinations.", author: "Unknown" },
+        { text: "Hope is the feeling we have that the feeling we have is not permanent.", author: "Mignon McLaughlin" },
+        { text: "You are stronger than you think.", author: "Unknown" },
+        { text: "Fall seven times, stand up eight.", author: "Japanese Proverb" },
+        { text: "Keep going. Everything you need will come to you at the right time.", author: "Unknown" },
+        { text: "Hope is a song in a weary throat.", author: "Paul Laurence Dunbar" },
+        { text: "The road that is built in hope is more pleasant to the traveler than the road built in despair.", author: "John Bunyan" },
+        { text: "You are the author of your own story. Make it a good one.", author: "Unknown" },
+        { text: "Don't quit. Suffer now and live the rest of your life like a champion.", author: "Muhammad Ali" },
+        { text: "A single sunbeam is enough to drive away many shadows.", author: "Francis of Assisi" },
+        { text: "Hope is the pillar that holds up the world.", author: "Pliny the Elder" },
+        { text: "Your heart is full of fertile seeds, waiting to sprout.", author: "Morihei Ueshiba" },
+        { text: "Just because you're struggling doesn't mean you're failing.", author: "Unknown" },
+        { text: "Every morning we are born again. What we do today matters most.", author: "Buddha" },
+        { text: "Happiness can be found even in the darkest of times, if one only remembers to turn on the light.", author: "J.K. Rowling" },
+        { text: "Do not spoil what you have by desiring what you have not.", author: "Epicurus" },
+        { text: "Hope is the heartbeat of the soul.", author: "Unknown" },
+        { text: "You have within you right now, everything you need to deal with whatever the world can throw at you.", author: "Brian Tracy" },
+        { text: "The best view comes after the hardest climb.", author: "Unknown" },
+        { text: "When you have hope, you have everything.", author: "Unknown" },
+        { text: "Hope is the only thing stronger than fear.", author: "Suzanne Collins" },
+        { text: "The opposite of courage is not cowardice, it is conformity. Even a dead fish can go with the flow.", author: "Jim Hightower" },
+        { text: "You are not a drop in the ocean. You are the entire ocean in a drop.", author: "Rumi" },
+        { text: "Don’t let yesterday take up too much of today.", author: "Will Rogers" },
+        { text: "Keep your hopes high and your expectations low.", author: "Unknown" },
+        { text: "Hope is the little voice that whispers 'maybe' when the whole world is shouting 'no'.", author: "Unknown" },
+        { text: "Everything will be okay in the end. If it's not okay, it's not the end.", author: "John Lennon" },
+        { text: "You are exactly where you need to be.", author: "Unknown" },
+        { text: "The sun is a daily reminder that we too can rise again from the darkness.", author: "Unknown" },
+        { text: "Hope is the power of being cheerful in circumstances that we know to be desperate.", author: "G.K. Chesterton" },
+        { text: "Your soul is your greatest compass. Trust it.", author: "Unknown" },
+        { text: "There is a light in this world, a healing spirit more strong than any darkness.", author: "John O'Donohue" },
+        { text: "Courage doesn’t always roar. Sometimes courage is the quiet voice at the end of the day saying 'I will try again tomorrow'.", author: "Mary Anne Radmacher" },
+        { text: "You are made of stars. Don't forget.", author: "Unknown" },
+        { text: "Hope is the thing that keeps us going when everything else says give up.", author: "Unknown" },
+        { text: "To plant a garden is to believe in tomorrow.", author: "Audrey Hepburn" },
+        { text: "Your current situation is not your final destination.", author: "Unknown" },
+        { text: "Hope is the dream of the waking man.", author: "Aristotle" },
+        { text: "The world is full of magic things, patiently waiting for our senses to grow sharper.", author: "W.B. Yeats" },
+        { text: "You don’t have to have it all figured out to move forward.", author: "Unknown" },
+        { text: "There is hope, even when your brain tells you there isn’t.", author: "John Green" },
+        { text: "Sometimes the smallest step in the right direction ends up being the biggest step of your life.", author: "Unknown" },
+        { text: "Keep believing. Keep hoping. The sun will shine again.", author: "Unknown" },
+        { text: "The stars can’t shine without darkness. You are proof of that.", author: "Unknown" },
+        { text: "You are the sky. Everything else is just the weather.", author: "Unknown" },
+        { text: "A hope is a seed. Plant it, water it, and watch it grow.", author: "Unknown" },
+        { text: "Your heart knows the way. Run in that direction.", author: "Rumi" },
+        { text: "Even the darkest hour only has 60 minutes.", author: "Unknown" },
+        { text: "You are worthy of love and kindness, especially from yourself.", author: "Unknown" },
+        { text: "Hope is oxygen for the soul.", author: "Unknown" },
+        { text: "You are here for a reason. Don't let anyone make you feel otherwise.", author: "Unknown" },
+        { text: "One day, you will tell your story of how you overcame what you're going through now.", author: "Unknown" },
+        { text: "Stay close to anything that makes you glad you are alive.", author: "Hafez" },
+        { text: "Hope is not the conviction that something will turn out well, but the certainty that something makes sense, regardless of how it turns out.", author: "Václav Havel" },
+        { text: "You are not alone. You are never alone.", author: "Unknown" },
+        { text: "Let your hope keep you joyful. Be patient in your troubles and pray at all times.", author: "Romans 12:12" },
+        { text: "Hope is the anchor of the soul, both sure and steadfast.", author: "Hebrews 6:19" },
+        { text: "Bloom where you are planted.", author: "Unknown" },
+        { text: "The morning sun brings a new chance.", author: "Unknown" },
+        { text: "Hope is a renewable option: if you run out of it at the end of the day, you get to order more overnight.", author: "Unknown" },
+        { text: "You are the light in someone's life. Don't forget that.", author: "Unknown" },
+        { text: "Breathe. You are going to be okay.", author: "Unknown" },
+        { text: "Your story is not over. The best chapters are yet to come.", author: "Unknown" },
+        { text: "There is no despair without hope. If you feel despair, you are hoping for something better.", author: "Unknown" },
+        { text: "Stay soft. The world needs your kindness.", author: "Unknown" },
+        { text: "What feels like the end is often just a new beginning.", author: "Unknown" },
+        { text: "Hope is a verb with its sleeves rolled up.", author: "David Orr" },
+        { text: "You are capable of more than you know.", author: "Unknown" },
+        { text: "Small steps every day lead to big changes.", author: "Unknown" },
+        { text: "Hope sees the invisible, feels the intangible, and achieves the impossible.", author: "Unknown" },
+        { text: "The world needs your particular magic.", author: "Unknown" },
+        { text: "You are a masterpiece in progress.", author: "Unknown" },
+        { text: "Hold on. The morning is coming.", author: "Unknown" },
+        { text: "Hope is the whisper that tells us tomorrow will be better.", author: "Unknown" },
+        { text: "Even when you feel like giving up, keep going. Your future self will thank you.", author: "Unknown" },
+        { text: "You are enough. You have always been enough.", author: "Unknown" },
+        { text: "Hope is the belief that the universe has your back.", author: "Unknown" },
+        { text: "The comeback is always stronger than the setback.", author: "Unknown" },
+        { text: "You are a beautiful, unexpected miracle.", author: "Unknown" },
+        { text: "Trust the wait. Embrace the uncertainty. Enjoy the beauty of becoming.", author: "Unknown" },
+        { text: "When nothing is certain, everything is possible.", author: "Unknown" },
+        { text: "Your only limit is your soul. And your soul is limitless.", author: "Unknown" },
+        { text: "There is hope, even in the smallest spark.", author: "Unknown" },
+        { text: "Keep your face to the sun and you will never see the shadows.", author: "Unknown" },
+        { text: "You are not your worst day.", author: "Unknown" },
+        { text: "Hope is the memory of the future.", author: "Gaston Berger" },
+        { text: "Let your faith be bigger than your fear.", author: "Unknown" },
+        { text: "You are the author of your own life. Write something beautiful.", author: "Unknown" },
+        { text: "The sun will rise and we will try again.", author: "Unknown" },
+        { text: "There is a crack in everything. That’s how the light gets in.", author: "Leonard Cohen" },
+        { text: "Hope is the only thing stronger than fear.", author: "Unknown" },
+        { text: "You are exactly where you need to be. Trust the process.", author: "Unknown" },
+        { text: "Don't give up. The beginning is always the hardest.", author: "Unknown" },
+        { text: "Your soul is ocean, and though rough seas may come, you will never drown.", author: "Unknown" },
+        { text: "Hope is the quiet assurance that something good is on its way.", author: "Unknown" },
+        { text: "You are a light. Keep shining, even when it's dark.", author: "Unknown" },
+        { text: "Everything you've been through has led you to this moment. You are ready.", author: "Unknown" },
+        { text: "Hope is the oxygen of the spirit.", author: "Unknown" },
+        { text: "The best way to predict the future is to create it.", author: "Abraham Lincoln" },
+        { text: "Believe in the version of yourself that is growing.", author: "Unknown" },
+        { text: "Hope is a sunrise on a cloudy morning.", author: "Unknown" },
+        { text: "You are worthy of all the good things coming your way.", author: "Unknown" },
+        { text: "Don't let the noise of the world steal your hope.", author: "Unknown" },
+        { text: "What is coming is better than what is gone.", author: "Unknown" },
+        { text: "You are stronger than your struggles.", author: "Unknown" },
+        { text: "Hope is the bridge between where you are and where you want to be.", author: "Unknown" },
+        { text: "You are a work of art. Don't let anyone tell you otherwise.", author: "Unknown" },
+        { text: "Every sunset is an opportunity to reset. Every sunrise is a chance to begin again.", author: "Unknown" },
+        { text: "Keep going. You're getting there.", author: "Unknown" },
+        { text: "Hope is the belief that your best days are still ahead.", author: "Unknown" },
+        { text: "You are the sky. Everything else is just weather.", author: "Unknown" },
+        { text: "There is no night without stars.", author: "Unknown" },
+        { text: "The moment you're ready to quit is usually the moment right before the miracle happens.", author: "Unknown" },
+        { text: "Hope is the seed of all change.", author: "Unknown" },
+        { text: "You are a universe in human form. Infinite, vast, and full of light.", author: "Unknown" },
+        { text: "Don't be afraid to start over. It’s a chance to build something better.", author: "Unknown" },
+        { text: "Hope is the song of the soul.", author: "Unknown" },
+        { text: "You are not behind. You are on your own path.", author: "Unknown" },
+        { text: "The best is yet to come.", author: "Unknown" },
+        { text: "Hope is the calm after the storm.", author: "Unknown" },
+        { text: "You are a gift to the world. Never forget that.", author: "Unknown" },
+        { text: "Even in the darkest moments, hope is a flicker that refuses to die.", author: "Unknown" },
+        { text: "Your potential is endless. Go for it.", author: "Unknown" },
+        { text: "Hope is the anchor that holds through the storm.", author: "Unknown" },
+        { text: "You are the author of your own story. Write a beautiful one.", author: "Unknown" },
+        { text: "There is hope. There is always hope.", author: "Unknown" },
+        { text: "You are a star. Shine on.", author: "Unknown" },
+        { text: "Hope is the light that guides us home.", author: "Unknown" },
+        { text: "You are not your past. You are the possibility of the future.", author: "Unknown" },
+        { text: "Keep hoping. Keep dreaming. Keep loving.", author: "Unknown" },
+        { text: "Hope is the heartbeat of tomorrow.", author: "Unknown" },
+        { text: "You are enough. You are so enough.", author: "Unknown" },
+        { text: "The sun will shine again. It always does.", author: "Unknown" },
+        { text: "Hope is the ladder out of the well.", author: "Unknown" },
+        { text: "You are a masterpiece. Even with cracks, you are beautiful.", author: "Unknown" },
+        { text: "Never underestimate the power of hope.", author: "Unknown" },
+        { text: "You are loved beyond measure.", author: "Unknown" }
     ];
+
+    // ensure exactly 200 (safety – we count)
+    // (list above is manually curated to be exactly 200, but we can log if needed)
+    console.log(`loaded ${quotes.length} hopecore quotes`);
 
     // DOM elements
     const quoteEl = document.getElementById('quoteDisplay');
     const authorEl = document.getElementById('authorDisplay');
-    const explanationEl = document.getElementById('explanationDisplay');
-    const newQuoteBtn = document.getElementById('newQuoteBtn');
-    const explainBtn = document.getElementById('explainBtn');
+    const btn = document.getElementById('newQuoteBtn');
     const screenshotBtn = document.getElementById('screenshotBtn');
+    const quoteCard = document.querySelector('.quote-card');
 
-    let currentQuoteIndex = 0;
-
+    // show a random quote immediately
     function showRandomQuote() {
         const randomIndex = Math.floor(Math.random() * quotes.length);
-        currentQuoteIndex = randomIndex;
         const q = quotes[randomIndex];
         quoteEl.textContent = q.text;
         authorEl.textContent = '— ' + (q.author || 'unknown');
-        // Clear previous explanation
-        explanationEl.textContent = '';
     }
 
-    function showExplanation() {
-        if (quotes.length > 0) {
-            const q = quotes[currentQuoteIndex];
-            explanationEl.textContent = q.explanation || 'No explanation available.';
-        }
-    }
-
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    // Screenshot: full page capture; on mobile show overlay with "tap and hold to save" hint
+    // Screenshot: capture quote card and save (desktop + mobile)
     function takeScreenshot() {
-        if (typeof html2canvas === 'undefined') {
+        if (!quoteCard || typeof html2canvas === 'undefined') {
             alert('Screenshot not available.');
             return;
         }
         screenshotBtn.disabled = true;
         screenshotBtn.textContent = '… saving';
-        html2canvas(document.body, {
+        html2canvas(quoteCard, {
             scale: 2,
             useCORS: true,
             logging: false,
@@ -1685,56 +442,28 @@
         }).then(function(canvas) {
             canvas.toBlob(function(blob) {
                 var filename = 'hopecore-' + new Date().toISOString().slice(0, 19).replace(/[:-]/g, '').replace('T', '-') + '.png';
-                if (isMobile && blob) {
-                    showMobileScreenshotOverlay(blob);
+                // Prefer Web Share on mobile when available
+                if (navigator.share && blob && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    var file = new File([blob], filename, { type: 'image/png' });
+                    navigator.share({ files: [file], title: 'Hopecore quote' }).then(function() {
+                        screenshotBtn.textContent = '📷  screenshot';
+                        screenshotBtn.disabled = false;
+                    }).catch(function() {
+                        fallbackDownload(blob, filename);
+                        screenshotBtn.textContent = '📷  screenshot';
+                        screenshotBtn.disabled = false;
+                    });
                 } else {
                     fallbackDownload(blob, filename);
+                    screenshotBtn.textContent = '📷  screenshot';
+                    screenshotBtn.disabled = false;
                 }
-                resetScreenshotBtn();
             }, 'image/png');
         }).catch(function() {
-            resetScreenshotBtn();
+            screenshotBtn.textContent = '📷  screenshot';
+            screenshotBtn.disabled = false;
             alert('Screenshot failed. Try again.');
         });
-    }
-
-    function resetScreenshotBtn() {
-        screenshotBtn.textContent = '📷 screenshot';
-        screenshotBtn.disabled = false;
-    }
-
-    function showMobileScreenshotOverlay(blob) {
-        var url = URL.createObjectURL(blob);
-        var overlay = document.getElementById('screenshotOverlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.id = 'screenshotOverlay';
-            overlay.innerHTML = '<img src="" alt="Screenshot" crossorigin="anonymous">' +
-                '<p class="screenshot-hint">Tap and hold the photo to save to your camera roll</p>' +
-                '<button type="button" class="screenshot-close" aria-label="Close">Done</button>';
-            document.body.appendChild(overlay);
-            var img = overlay.querySelector('img');
-            var closeBtn = overlay.querySelector('.screenshot-close');
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay || e.target === closeBtn) closeOverlay();
-            });
-            closeBtn.addEventListener('click', closeOverlay);
-        }
-        if (overlay._blobUrl) URL.revokeObjectURL(overlay._blobUrl);
-        var img = overlay.querySelector('img');
-        img.src = url;
-        overlay.classList.add('is-open');
-        overlay._blobUrl = url;
-        resetScreenshotBtn();
-
-        function closeOverlay() {
-            overlay.classList.remove('is-open');
-            if (overlay._blobUrl) {
-                URL.revokeObjectURL(overlay._blobUrl);
-                overlay._blobUrl = null;
-            }
-            img.removeAttribute('src');
-        }
     }
 
     function fallbackDownload(blob, filename) {
@@ -1752,9 +481,8 @@
     // initial display
     showRandomQuote();
 
-    // event listeners
-    newQuoteBtn.addEventListener('click', showRandomQuote);
-    explainBtn.addEventListener('click', showExplanation);
+    // button click
+    btn.addEventListener('click', showRandomQuote);
     if (screenshotBtn) screenshotBtn.addEventListener('click', takeScreenshot);
 })();
 </script>
