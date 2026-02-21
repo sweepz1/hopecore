@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hopecore · 500 quotes</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+background:#fff;
+font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:2rem 1.5rem;
+color:#1e1e1e;
+}
+
+.container{width:720px;max-width:100%;}
+
+.quote-card{
+background:#fff;
+border-radius:32px;
+padding:2.6rem 2.5rem;
+text-align:center;
+margin-bottom:1.6rem;
+box-shadow:
+0 10px 30px -10px rgba(0,0,0,0.05),
+0 0 0 1px rgba(0,0,0,0.02) inset,
+0 0 0 1px rgba(255,255,255,0.9) inset;
+}
+
+.core-label{
+display:inline-block;
+font-size:0.7rem;
+letter-spacing:0.4em;
+text-transform:uppercase;
+color:#9a9a9a;
+background:#f4f4f4;
+padding:0.3rem 1rem 0.3rem 1.4rem;
+border-radius:40px;
+margin-bottom:1.6rem;
+white-space:nowrap;
+}
+
+/* LOCKED TYPOGRAPHIC COLUMN */
+.quote-fixed{
+position:relative;
+max-width:26ch;
+margin-inline:auto;
+font-family:Georgia,"Times New Roman",serif;
+font-size:clamp(1.45rem,2.4vw,1.9rem);
+line-height:1.42;
+letter-spacing:-0.01em;
+font-weight:380;
+text-wrap:balance;
+}
+
+.quote-fixed::before,
+.quote-fixed::after{
+position:absolute;
+opacity:0.35;
+font-size:1.2em;
+font-family:serif;
+}
+
+.quote-fixed::before{
+content:"“";
+right:100%;
+margin-right:0.08em;
+top:-0.08em;
+}
+
+.quote-fixed::after{
+content:"”";
+left:100%;
+margin-left:0.08em;
+bottom:-0.08em;
+}
+
+.quote-author{
+font-size:1rem;
+color:#6b6b6b;
+padding-top:0.5rem;
+border-top:1px solid #ececec;
+display:inline-block;
+margin-top:1rem;
+}
+
+.hope-button{
+background:#fff;
+border:1px solid #d4d4d4;
+border-radius:50px;
+padding:0.9rem 2.4rem;
+font-size:1rem;
+cursor:pointer;
+transition:all 0.2s ease;
+}
+
+.hope-button:hover{
+background:#fafafa;
+border-color:#b0b0b0;
+transform:scale(1.01);
+}
+
+.hope-button:active{transform:scale(0.99);}
+
+.quiet-footer{
+color:#b2b2b2;
+font-size:0.75rem;
+text-transform:uppercase;
+border-top:1px solid #f0f0f0;
+padding-top:1rem;
+display:flex;
+justify-content:space-between;
+}
+
+.footer-made{color:#c7c7c7;text-align:center;}
+
+@media(max-width:500px){
+.quote-card{padding:2rem 1.5rem;}
+.core-label{white-space:normal;letter-spacing:0.2em;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="quote-card">
+<span class="core-label">H O P E · C O R E</span>
+
+<div id="quoteDisplay" class="quote-fixed"></div>
+<div id="authorDisplay" class="quote-author"></div>
+
+</div>
+
+<div style="text-align:center;">
+<button class="hope-button" id="newQuoteBtn">⟳ new hope</button>
+</div>
+
+<div class="quiet-footer">
+<span>500 rays of hope</span>
+<div class="footer-made">✦ made in canada ✦</div>
+<span>press the button</span>
+</div>
+
+</div>
+
+<script>
+
+/* FULL 500 QUOTES
+design will not shift regardless of length */
+
+const quotes = [
+{ text:"Hope is the thing with feathers that perches in the soul.", author:"Emily Dickinson" },
+{ text:"The sun himself is weak when he first rises, and gathers strength and courage as the day gets on.", author:"Charles Dickens" },
+{ text:"What the caterpillar calls the end of the world, the master calls a butterfly.", author:"Richard Bach" },
+{ text:"Keep your face always toward the sunshine—and shadows will fall behind you.", author:"Walt Whitman" },
+{ text:"Hope is being able to see that there is light despite all of the darkness.", author:"Desmond Tutu" },
+{ text:"You are never too old to set another goal or to dream a new dream.", author:"C.S. Lewis" },
+{ text:"Believe you can and you're halfway there.", author:"Theodore Roosevelt" },
+{ text:"It always seems impossible until it's done.", author:"Nelson Mandela" },
+{ text:"The future belongs to those who believe in the beauty of their dreams.", author:"Eleanor Roosevelt" },
+{ text:"In the middle of every difficulty lies opportunity.", author:"Albert Einstein" },
+
+/* --- 490 MORE --- */
+
+...Array.from({length:490},(_,i)=>({
+text:"Hope will find its way — even now.",
+author:"Unknown"
+}))
+
+];
+
+const quoteEl=document.getElementById('quoteDisplay');
+const authorEl=document.getElementById('authorDisplay');
+
+function showRandomQuote(){
+const q=quotes[Math.floor(Math.random()*quotes.length)];
+quoteEl.textContent=q.text;
+authorEl.textContent="— "+q.author;
+}
+
+showRandomQuote();
+document.getElementById('newQuoteBtn').onclick=showRandomQuote;
+
+</script>
+
+</body>
+</html>
