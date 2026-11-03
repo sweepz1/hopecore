@@ -11,6 +11,8 @@
             box-sizing: border-box;
         }
 
+        :root { color-scheme: light dark; }
+
         body {
             background: radial-gradient(ellipse at 50% 0%, #fff7e8 0%, #f9f6f0 48%, #f4f0e9 100%);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -117,8 +119,9 @@
         }
 
         .quote-source {
-            display: inline-block;
-            margin-top: 0.7rem;
+            display: block;
+            width: fit-content;
+            margin: 0.7rem auto 0;
             color: #8a7251;
             font-size: 0.75rem;
             text-decoration: underline;
@@ -227,6 +230,45 @@
 
         .collection-credit a { color: inherit; text-underline-offset: 2px; }
 
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: radial-gradient(ellipse at 50% 0%, #363027 0%, #252321 48%, #1d1c1a 100%);
+                color: #eee7dc;
+            }
+
+            .quote-card {
+                background: rgba(40, 37, 33, 0.96);
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 12px 36px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.025) inset;
+            }
+
+            .quote-card:hover {
+                box-shadow: 0 20px 44px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+            }
+
+            .core-label { color: #c7b697; background: #3b352c; }
+            .daily-label { color: #c0ad91; }
+            .quote-text { color: #f0e4d2; }
+            .quote-author { color: #c7bdb0; border-color: #49443d; }
+            .quote-source { color: #d8b98a; }
+            .explanation-box { background: #302d29; border-color: #48433b; }
+            .explanation-label { color: #b9aa96; }
+            .explanation-text { color: #e0d8cd; }
+
+            .hope-button {
+                color: #e8dcc8;
+                background-color: #302d29;
+                border-color: #5a5041;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            }
+
+            .hope-button:hover { background-color: #3b362f; border-color: #9e8969; }
+            .hope-button:active, .hope-button.active { background-color: #484137; border-color: #b09a76; }
+            .quiet-footer { color: #a99f92; border-color: #403b35; }
+            .collection-credit { color: #b5a894; }
+            .dot { color: #81786c; }
+        }
+
         .dot {
             color: #d0d0d0;
             font-size: 1.2rem;
@@ -254,8 +296,8 @@
         <span class="core-label">H O P E · C O R E</span>
         <span id="dailyLabel" class="daily-label" aria-live="polite"></span>
         <div id="quoteDisplay" class="quote-text">there is light</div>
-        <a id="sourceDisplay" class="quote-source" target="_blank" rel="noopener noreferrer" hidden></a>
         <div id="authorDisplay" class="quote-author">unknown</div>
+        <a id="sourceDisplay" class="quote-source" target="_blank" rel="noopener noreferrer" hidden></a>
         
         <div id="explanationSection" class="explanation-section">
             <div class="explanation-box">
